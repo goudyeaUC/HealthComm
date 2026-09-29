@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+  </Folder>
   <Project Path="HealthComm/HealthCommFrontend.csproj">
     <Deploy Solution="Debug|*" />
   </Project>
