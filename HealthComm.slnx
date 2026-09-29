@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="HealthComm/HealthCommFrontend.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
+  <Project Path="HealthCommBackend/HealthCommBackend.csproj" />
+</Solution>
