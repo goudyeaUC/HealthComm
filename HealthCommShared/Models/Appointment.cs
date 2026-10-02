@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HealthComm.Models
 {
-    internal class Appointment
+    public class Appointment
     {
         public string VisitType { get; set; }
 

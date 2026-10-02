@@ -1,5 +1,6 @@
 namespace HealthComm;
 
+using HealthCommShared.Services;
 using HealthComm.Models;
 
 public partial class AdminPage : ContentPage

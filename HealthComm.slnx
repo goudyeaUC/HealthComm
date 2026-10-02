@@ -3,4 +3,5 @@
     <Deploy Solution="Debug|*" />
   </Project>
   <Project Path="HealthCommBackend/HealthCommBackend.csproj" />
+  <Project Path="HealthCommShared/HealthCommShared.csproj" Id="3a788cc7-3c79-493a-9f27-a7a0c0fc0e7d" />
 </Solution>

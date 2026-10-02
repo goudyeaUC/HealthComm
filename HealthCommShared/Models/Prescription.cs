@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HealthComm.Models
 {
-    internal class Prescription
+    public class Prescription
     {
         public string DrugName { get; set; }
         public string Dosage { get; set; }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using HealthComm.Models;
 
-namespace HealthComm
+namespace HealthCommShared.Services
 {
     public class LocalDBService
     {
@@ -13,7 +13,11 @@ namespace HealthComm
 
         public LocalDBService()
         {
-            _connection = new SQLiteAsyncConnection(Path.Combine(FileSystem.AppDataDirectory, DB_NAME));
+            var dbPath = Path.Combine(
+                Environment.CurrentDirectory,
+                DB_NAME);
+
+            _connection = new SQLiteAsyncConnection(dbPath);
         }
 
         private async Task Init()

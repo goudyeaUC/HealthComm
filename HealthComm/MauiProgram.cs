@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using HealthCommShared.Services;
 
 namespace HealthComm
 {
