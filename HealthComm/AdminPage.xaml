@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HealthComm.AdminPage"
+             Title="AdminPage">
+    <ScrollView>
+        <Grid Padding="20"
+      RowSpacing="16"
+      RowDefinitions="Auto,Auto,Auto,*">
+            <VerticalStackLayout Grid.Row="0"
+                         Spacing="6">
+                <Label Text="Admin"
+               FontSize="28"
+               FontAttributes="Bold" />
+                <Label Text="Add or update data."
+               TextColor="DimGray" />
+            </VerticalStackLayout>
+
+            <Frame Grid.Row="1">
+                <VerticalStackLayout Spacing="12">
+                    <Entry x:Name="patientnameEntry" Placeholder="PatientName"/>
+                    <Entry x:Name="appointmentdateEntry" Placeholder="AppointmentDate"/>
+                    <Entry x:Name="visittypeEntry" Placeholder="VisitType"/>
+                    <Entry x:Name="drugnameEntry" Placeholder="DrugName"/>
+                    <Entry x:Name="dosageEntry" Placeholder="Dosage"/>
+                    <Button x:Name="saveButton"
+                    Text="Save"
+                    HeightRequest="48"
+                    Clicked="saveButton_Clicked"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Button Grid.Row="2"
+            Text="Login"
+            WidthRequest="120"
+            HorizontalOptions="Start"
+            BackgroundColor="DimGray"
+            Clicked="LoginButton_Clicked" />
+
+            <Frame Grid.Row="3">
+                <ListView x:Name="Lv"
+                  HasUnevenRows="True"
+                  ItemTapped="Lv_ItemTapped">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <VerticalStackLayout Padding="8"
+                                             Spacing="6">
+                                    <Label Text="{Binding PatientName}"
+                                   FontSize="18"
+                                   FontAttributes="Bold"/>
+                                    <Label Text="{Binding AppointmentDate}"
+                                   TextColor="DimGray"/>
+                                    <Label Text="{Binding VisitType}"
+                                   LineBreakMode="TailTruncation"/>
+                                </VerticalStackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Frame>
+        </Grid>
+    </ScrollView>
+</ContentPage>

@@ -18,7 +18,11 @@ namespace HealthComm
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
-
+            builder.Services.AddSingleton<LocalDBService>();
+            builder.Services.AddTransient<AdminPage>();
+            builder.Services.AddTransient<HomePage>();
+            builder.Services.AddTransient<LoginPage>();
+            builder.Services.AddTransient<MainPage>();
             return builder.Build();
         }
     }

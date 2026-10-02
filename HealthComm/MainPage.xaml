@@ -4,95 +4,114 @@
              x:Class="HealthComm.MainPage">
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="20">
+        <Grid Padding="20,40,20,20"
+         MinimumHeightRequest="720">
+            <VerticalStackLayout Padding="20" Spacing="20">
+                <Grid ColumnDefinitions="*,*"
+                    ColumnSpacing="12">
+                    <Button Grid.Column="0"
+                    x:Name="Home"
+                    Text="Sign Out"
+                    HeightRequest="48"
+                    BackgroundColor="DimGray"
+                    Clicked="LoginButton_Clicked" />
+                    <Button Grid.Column="1" x:Name="Admin"
+                    Text="Admin"
+                    HeightRequest="48"
+                    BackgroundColor="DimGray"
+                     Clicked="AdminButton_Clicked"/> 
+                    
+                </Grid>
+                <!-- Welcome -->
+                <Frame>
+                    <VerticalStackLayout>
+                        <Label  Text=""
+                    x:Name="LblUsername" 
+                       FontSize="24"
+                       FontAttributes="Bold"/>
+                        <Label Text="Next Appointment: Oct 15, 2026 @ 10:30 AM"/>
+                    </VerticalStackLayout>
+                </Frame>
 
-            <!-- Welcome -->
-            <Frame>
-                <VerticalStackLayout>
-                    <Label Text="Good Morning, John"
-                   FontSize="24"
+                <!-- Wait Time -->
+                <Frame>
+                    <VerticalStackLayout>
+                        <Label Text="Average Clinic Wait Time"
                    FontAttributes="Bold"/>
-                    <Label Text="Next Appointment: Oct 15, 2026 @ 10:30 AM"/>
-                </VerticalStackLayout>
-            </Frame>
-
-            <!-- Wait Time -->
-            <Frame>
-                <VerticalStackLayout>
-                    <Label Text="Average Clinic Wait Time"
-                   FontAttributes="Bold"/>
-                    <Label Text="22 Minutes"
+                        <Label Text="22 Minutes"
                    FontSize="32"
                    TextColor="Green"/>
-                    <Label Text="Delay reported in Laboratory Department"/>
-                    <Button Text="View Live Updates"/>
-                </VerticalStackLayout>
-            </Frame>
+                        <Label Text="Delay reported in Laboratory Department"/>
+                        <Button Text="View Live Updates" Command="{Binding ViewUpdatesCommand}"/>
+                    </VerticalStackLayout>
+                </Frame>
 
-            <!-- Prescriptions -->
-            <Frame>
-                <VerticalStackLayout>
-                    <Label Text="My Prescriptions"
+                <!-- Prescriptions -->
+                <Frame>
+                    <VerticalStackLayout>
+                        <Label Text="My Prescriptions"
                    FontAttributes="Bold"/>
 
-                    <CollectionView ItemsSource="{Binding Prescriptions}">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <Frame Margin="0,5">
-                                    <VerticalStackLayout>
-                                        <Label Text="{Binding DrugName}"/>
-                                        <Label Text="{Binding Dosage}"/>
-                                        <HorizontalStackLayout>
-                                            <Button Text="Drug Facts"/>
-                                            <Button Text="Call Refill"/>
-                                        </HorizontalStackLayout>
-                                    </VerticalStackLayout>
-                                </Frame>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </VerticalStackLayout>
-            </Frame>
+                        <CollectionView ItemsSource="{Binding Prescriptions}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame Margin="0,5">
+                                        <Label Text="{Binding DisplayText}"/>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </Frame>
 
-            <!-- Calendar -->
-            <Frame>
-                <VerticalStackLayout>
-                    <Label Text="Upcoming Visits"
+                <!-- Calendar -->
+                <Frame>
+                    <VerticalStackLayout>
+                        <Label Text="Upcoming Visits" FontAttributes="Bold"/>
+
+                        <CollectionView ItemsSource="{Binding Appointments}" >
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame Margin="0,5">
+                                        <VerticalStackLayout>
+                                            <Label Text="{Binding DisplayText}"/>
+                                        </VerticalStackLayout>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                        <Button Text="Schedule New Visit" Command="{Binding ScheduleVisitCommand}"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Quick Question -->
+                <Frame>
+                    <VerticalStackLayout>
+                        <Label Text="Ask a Quick Question"/>
+                        <Editor Placeholder="Enter your question..." Text="{Binding Question}"/>
+                        <Button Text="Send" Command="{Binding SendQuestionCommand}"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Notifications -->
+                <Frame>
+                    <VerticalStackLayout>
+                        <Label Text="Notification Settings"
                    FontAttributes="Bold"/>
 
-                    <CollectionView ItemsSource="{Binding Appointments}" />
+                        <CheckBox/>
+                        <Label Text="Notify on every status change"/>
 
-                    <Button Text="Schedule New Visit"/>
-                </VerticalStackLayout>
-            </Frame>
+                        <CheckBox/>
+                        <Label Text="Notify when less than 30 mins remain"/>
 
-            <!-- Quick Question -->
-            <Frame>
-                <VerticalStackLayout>
-                    <Label Text="Ask a Quick Question"/>
-                    <Editor Placeholder="Enter your question..." />
-                    <Button Text="Send"/>
-                </VerticalStackLayout>
-            </Frame>
+                        <CheckBox/>
+                        <Label Text="Notify 15 mins before appointment"/>
+                    </VerticalStackLayout>
+                </Frame>
 
-            <!-- Notifications -->
-            <Frame>
-                <VerticalStackLayout>
-                    <Label Text="Notification Settings"
-                   FontAttributes="Bold"/>
-
-                    <CheckBox/>
-                    <Label Text="Notify on every status change"/>
-
-                    <CheckBox/>
-                    <Label Text="Notify when less than 30 mins remain"/>
-
-                    <CheckBox/>
-                    <Label Text="Notify 15 mins before appointment"/>
-                </VerticalStackLayout>
-            </Frame>
-
-        </VerticalStackLayout>
+            </VerticalStackLayout>
+        </Grid>
     </ScrollView>
-
 </ContentPage>
