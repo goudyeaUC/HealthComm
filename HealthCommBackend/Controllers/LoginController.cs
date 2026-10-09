@@ -1,4 +1,5 @@
 ﻿using Hl7.Fhir.Rest;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthCommBackend.Controllers
