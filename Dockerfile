@@ -2,8 +2,8 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 
 WORKDIR /src
 
-COPY ["HealthCommBackend.csproj", "./"]
-RUN dotnet restore "./HealthCommBackend.csproj"
+COPY ["HealthCommBackend/HealthCommBackend.csproj", "HealthCommBackend/"]
+RUN dotnet restore "HealthCommBackend/HealthCommBackend.csproj"
 
 COPY . .
 RUN dotnet publish "HealthCommBackend.csproj" -c Release -o /app/publish
@@ -16,8 +16,8 @@ COPY --from=build /app/publish .
 
 RUN mkdir -p /app/data
 
-ENV ASPNETCORE_HTTP_PORT=5000
+ENV ASPNETCORE_URLS=http://+:8080
 
-EXPOSE 5000
+EXPOSE 8080
 
 ENTRYPOINT ["dotnet", "HealthCommBackend.dll"]

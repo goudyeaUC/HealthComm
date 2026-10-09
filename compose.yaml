@@ -9,6 +9,7 @@ services:
 
     environment:
       ConnectionStrings__DefaultConnection: "Data Source=/app/data/app.db"
+      ASPNNETCORE_URLS: "http://+:8080"
 
     volumes:
       - sqlite-data:/app/data

@@ -5,7 +5,7 @@ namespace HealthCommBackend
 {
     public class PatientContext : DbContext
     {
-        public DbSet<User> Users { get; set; }
+        public DbSet<Models.ApplicationUser> Users { get; set; }
         public string DbPath { get; }
 
         public PatientContext()
