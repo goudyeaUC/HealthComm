@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HealthComm.PractitionerDashboardPage"
+             Title="PractitionerDashboardPage">
+    <VerticalStackLayout Padding="10" Spacing="5">
+
+        <Grid ColumnDefinitions="*,2*"
+      Padding="10"
+      BackgroundColor="LightGray">
+            <Label Grid.Column="0"
+           Text="Practitioner ID"
+           FontAttributes="Bold" />
+            <Label Grid.Column="1"
+           Text="Practitioner Name"
+           FontAttributes="Bold" />
+        </Grid>
+
+        <CollectionView x:Name="LvPractitioners"
+                VerticalOptions="Fill"
+                SelectionMode="None">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnDefinitions="*,2*"
+                  Padding="10">
+
+                        <Label Grid.Column="0"
+                       Text="{Binding Id}"
+                       VerticalOptions="Center" />
+
+                        <Label Grid.Column="1"
+                       Text="{Binding Name}"
+                       VerticalOptions="Center" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

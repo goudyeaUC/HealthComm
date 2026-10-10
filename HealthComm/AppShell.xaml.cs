@@ -9,6 +9,7 @@
             Routing.RegisterRoute(nameof(AdminPage), typeof(AdminPage));
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
             Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
+            Routing.RegisterRoute(nameof(PractitionerDashboardPage), typeof(PractitionerDashboardPage));
         }
     }
 }

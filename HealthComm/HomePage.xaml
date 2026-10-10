@@ -29,6 +29,10 @@
                         Text="Admin"
                         HeightRequest="50"
                         Clicked="adminButton_Clicked"/>
+                        <Button x:Name="practitionerButton"
+                        Text="Practitioner Dashboard"
+                        HeightRequest="50"
+                        Clicked="practitionerButton_Clicked" />
                     </VerticalStackLayout>
                 </Frame>
             </VerticalStackLayout>

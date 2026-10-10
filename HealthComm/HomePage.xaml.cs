@@ -17,4 +17,10 @@ public partial class HomePage : ContentPage
 
         Shell.Current.Navigation.PushAsync(page);
     }
+    private async void practitionerButton_Clicked(object sender, EventArgs e)
+    {
+
+
+        Shell.Current.GoToAsync(nameof(PractitionerDashboardPage));
+    }
 }
