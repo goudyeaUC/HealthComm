@@ -6,7 +6,7 @@ COPY ["HealthCommBackend/HealthCommBackend.csproj", "HealthCommBackend/"]
 RUN dotnet restore "HealthCommBackend/HealthCommBackend.csproj"
 
 COPY . .
-RUN dotnet publish "HealthCommBackend.csproj" -c Release -o /app/publish
+RUN dotnet publish "HealthCommBackend/HealthCommBackend.csproj" -c Release -o /app/publish
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
 
