@@ -17,7 +17,8 @@ builder.Services.AddDbContext<BackendDBContext>(options =>
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<BackendDBContext>();
+    .AddEntityFrameworkStores<BackendDBContext>()
+    .AddSignInManager();
 
 
 
