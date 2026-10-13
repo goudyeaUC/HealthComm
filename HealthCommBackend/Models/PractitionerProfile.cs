@@ -1,6 +1,6 @@
 ﻿namespace HealthCommBackend.Models
 {
-    public class PracticionerProfile
+    public class PractitionerProfile
     {
         public int Id { get; set; }
         public ApplicationUser UnderlyingUserKey { get; set; }
