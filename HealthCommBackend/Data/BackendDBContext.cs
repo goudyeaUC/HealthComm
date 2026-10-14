@@ -12,7 +12,35 @@ namespace HealthCommBackend.Data
         {
         }
 
-        public DbSet<Practicioner> Practicioners { get; set; }
-        public DbSet<Patient> Patients { get; set; }
+        public DbSet<PractitionerProfile> PractitionerProfiles { get; set; }
+        public DbSet<PatientProfile> PatientProfiles { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            // Configure the one-to-one relationship between ApplicationUser and PatientProfile
+            modelBuilder.Entity<ApplicationUser>()
+                .HasOne(a => a.PatientProfile)
+                .WithOne(p => p.UnderlyingUserKey)
+                .HasForeignKey<PatientProfile>(p => p.UserId);
+            // Configure the one-to-one relationship between ApplicationUser and PractitionerProfile
+            modelBuilder.Entity<ApplicationUser>()
+                .HasOne(a => a.PractitionerProfile)
+                .WithOne(p => p.UnderlyingUserKey)
+                .HasForeignKey<PractitionerProfile>(p => p.Id);
+
+            //Enforce unique keys
+            modelBuilder.Entity<PatientProfile>()
+                .HasIndex(p => p.UserId)
+                .IsUnique();
+            modelBuilder.Entity<PractitionerProfile>()
+                .HasIndex(p => p.UserId)
+                .IsUnique();
+        }
+
+
+
     }
 }
+
