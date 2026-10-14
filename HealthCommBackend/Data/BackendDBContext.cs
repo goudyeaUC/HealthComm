@@ -11,8 +11,8 @@ namespace HealthCommBackend.Data
             : base(options)
         {
         }
-
+        /*
         public DbSet<Practicioner> Practicioners { get; set; }
-        public DbSet<Patient> Patients { get; set; }
+        public DbSet<Patient> Patients { get; set; } */
     }
 }

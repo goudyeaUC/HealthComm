@@ -1,8 +1,11 @@
+
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Rest;
 using System.Collections.Concurrent;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+//using System.Net.Http.Json;
+using System.Text.Json;
 
 namespace HealthComm;
 
@@ -17,63 +20,62 @@ public partial class PractitionerDashboardPage : ContentPage
 
     private async System.Threading.Tasks.Task retrieveData()
     {
-        string fhirBaseUrl =
-            "https://hapi.fhir.org/baseR4";
-
-        var client = new FhirClient(fhirBaseUrl);
-
-
+       
         try
         {
+            using var client = new HttpClient();
 
-            Hl7.Fhir.Model.Bundle results = await client.SearchAsync<Practitioner>(
-                new string[] { "_count=10" }
-            );
-            if (results != null)
+            // developer needs to check port for the backend API and update the URL accordingly
+
+            string url =
+                "http://localhost:5167/api/practitioners";
+          
+
+            try
             {
+                var response = await client.GetAsync(url);
 
-                Debug.WriteLine(results.Entry.Count);
-            }
+                string str2 = await response.Content.ReadAsStringAsync();
 
-            foreach (var entry in results.Entry)
-            {
-                string? fullUrl = entry.FullUrl;
+                //following is left for debugging purposes, to check the response from the backend API
 
-                if (!string.IsNullOrEmpty(fullUrl))
+                await DisplayAlert(
+                    "Response",
+                    $"Status: {response.StatusCode}\n\n{str2}",
+                    "OK");
+
+                var options = new JsonSerializerOptions
                 {
-                    string practitionerId =
-                        fullUrl.Split('/').Last();
+                    PropertyNameCaseInsensitive = true
+                };
 
-                    Debug.WriteLine($"Practitioner ID: {practitionerId}");
-                    try
-                    {
-                        Practitioner? practitioner =
-                                    await client.ReadAsync<Practitioner>(
-                                        $"Practitioner/{practitionerId}"
-                                    );
+                practitionerNodes =
+                    JsonSerializer.Deserialize<List<PractitionerNode>>(str2, options) ?? new();
+                //following is left for debugging purposes, to check the deserialized list of PractitionerNode objects
 
-                        string name = practitioner?.Name?.FirstOrDefault()?.ToString();
-                        Debug.WriteLine($"Practitioner Name: {name}");
-                        PractitionerNode practitionerNode = new PractitionerNode
-                        {
-                            Id = practitionerId,
-                            Name = name ?? "Unknown"
-                        };
-                        practitionerNodes.Add(practitionerNode);
-                    }
-                    catch (Exception ex)
-                    {
-                        Debug.WriteLine(ex.Message);
-                    }
-                }
+                string json = JsonSerializer.Serialize(practitionerNodes);
+
+                await DisplayAlert(
+                    "List obj",
+                    $"{json}",
+                    "OK");
+
             }
+            catch (Exception ex)
+            {
+                //following is left for debugging purposes, to check the error message if the request fails or the response cannot be deserialized
+                await DisplayAlert(
+                    "Error",
+                    ex.ToString(),
+                    "OK");
+            }
+           
 
-
-        }
+        } 
         catch (Exception ex)
         {
             Debug.WriteLine(ex.Message);
-        }
+        } 
     }
 
     protected override async void OnAppearing()
@@ -87,6 +89,8 @@ public partial class PractitionerDashboardPage : ContentPage
 
             System.Diagnostics.Debug.WriteLine(
                 $"Retrieved {practitionerNodes.Count} practitioners.");
+            //following is left for debugging purposes, to show api call did not return any practitioners,
+            //and to show the default list of practitioners is being used instead
 
             if (practitionerNodes.Count == 0)
             {
