@@ -12,8 +12,8 @@ namespace HealthCommBackend.Data
         {
         }
 
-        public DbSet<PractitionerProfile> PractitionerProfiles { get; set; }
-        public DbSet<PatientProfile> PatientProfiles { get; set; }
+        public DbSet<PractitionerProfile> Practitioners { get; set; }
+        public DbSet<PatientProfile> Patients { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

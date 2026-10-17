@@ -16,6 +16,8 @@ namespace HealthCommBackend.Services
             _context = context;
         }
 
+        public async Task 
+
         public async Task<ApplicationUser> GetUserByEmailAsync(string email)
         {
             return await _userManager.FindByEmailAsync(email);
