@@ -1,10 +1,11 @@
 ﻿using HealthCommBackend.DTOs;
+using Microsoft.AspNetCore.Identity;
 
 namespace HealthCommBackend.Interfaces
 {
     public interface IUserRegistrationService
     {
-        Task RegisterPatientAsync(PatientRegistrationDTO patientRegistrationRequest);
-        Task RegisterPractitionerAsync(PractitionerRegistrationDto practitionerRegistrationRequest);
+        Task<IdentityResult> RegisterPatientAsync(PatientRegistrationDTO patientRegistrationRequest);
+        Task<IdentityResult> RegisterPractitionerAsync(PractitionerRegistrationDto practitionerRegistrationRequest);
     }
 }

@@ -2,11 +2,12 @@
 using HealthCommBackend.Models;
 using HealthCommBackend.Data;
 using HealthCommBackend.DTOs;
+using HealthCommBackend.Interfaces;
 using Hl7.Fhir.Model;
 
 namespace HealthCommBackend.Services
 {
-    public class LoginService
+    public class LoginService : IUserRegistrationService
     {
         private UserManager<ApplicationUser> _userManager;
         private BackendDBContext _context;
