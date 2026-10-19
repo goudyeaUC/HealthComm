@@ -3,6 +3,7 @@ using HealthCommBackend.Models;
 using HealthCommBackend.Data;
 using HealthCommBackend.DTOs;
 using HealthCommBackend.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Hl7.Fhir.Model;
 
 namespace HealthCommBackend.Services
@@ -76,6 +77,17 @@ namespace HealthCommBackend.Services
                 await _context.SaveChangesAsync();
             }
             return result;
+        }
+
+        public async System.Threading.Tasks.Task DeletePatientAsync(string email) //FHIR also has a "Task" type
+        {
+            var patient = await _context.Patients.FirstOrDefaultAsync(p => p.Email == email);
+            if (patient != null)
+            {
+                await _userManager.DeleteAsync(await _userManager.FindByEmailAsync(email));
+                _context.Patients.Remove(patient);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }
