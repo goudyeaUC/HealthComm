@@ -14,7 +14,7 @@ namespace HealthCommBackend.Controllers
         [HttpGet]
         public async Task<IActionResult> GetPractitioners()
         {
-            var practitioners = new List<PractitionerDto>();
+            var practitioners = new List<PractitionerRegistrationDTO>();
 
             try
             {
@@ -46,7 +46,7 @@ namespace HealthCommBackend.Controllers
                             practitioner?.Name?.FirstOrDefault()?.ToString()
                             ?? "Unknown";
 
-                        practitioners.Add(new PractitionerDto
+                        practitioners.Add(new PractitionerRegistrationDTO
                         {
                             Id = practitionerId,
                             Name = name

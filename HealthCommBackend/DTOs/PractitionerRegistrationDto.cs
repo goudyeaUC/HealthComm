@@ -1,6 +1,6 @@
 ﻿namespace HealthCommBackend.DTOs
 {
-    public class PractitionerRegistrationDto
+    public class PractitionerRegistrationDTO
     {
         public string Email { get; set; } = null!;
         public string Password { get; set; } = null!;

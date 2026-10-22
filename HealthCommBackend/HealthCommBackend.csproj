@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DTOs\LoginRequestDTO.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="DTOs\LoginRequestDTO.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Hl7.Fhir.R4" Version="6.6.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.12" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.12" />
