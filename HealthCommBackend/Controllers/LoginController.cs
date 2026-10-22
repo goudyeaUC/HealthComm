@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using HealthCommBackend.Interfaces;
-using HealthCommBackend.DTOs;
 using HealthCommBackend.Services;
 using Microsoft.AspNetCore.Identity;
 using HealthCommBackend.Models;
+using HealthCommShared.DTOs;
 
 namespace HealthCommBackend.Controllers
 {
@@ -34,7 +34,7 @@ namespace HealthCommBackend.Controllers
 
         [HttpPost("register/practitioner")]
         [AllowAnonymous]
-        public async Task<IActionResult> RegisterPractitioner([FromBody] PractitionerRegistrationDto practitionerRegistrationRequest)
+        public async Task<IActionResult> RegisterPractitioner([FromBody] PractitionerRegistrationDTO practitionerRegistrationRequest)
         {
             var result = await _registrationService.RegisterPractitionerAsync(practitionerRegistrationRequest);
             if (result.Succeeded)

@@ -1,4 +1,4 @@
-﻿namespace HealthCommBackend.DTOs
+﻿namespace HealthCommShared.DTOs
 {
     public class PractitionerRegistrationDTO
     {

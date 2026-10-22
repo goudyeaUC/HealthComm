@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using HealthCommBackend.Models;
 using HealthCommBackend.Data;
-using HealthCommBackend.DTOs;
+using HealthCommShared.DTOs;
 using HealthCommBackend.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Hl7.Fhir.Model;
@@ -52,7 +52,7 @@ namespace HealthCommBackend.Services
             return result;
         }
 
-        public async Task<IdentityResult> RegisterPractitionerAsync(PractitionerRegistrationDto practitionerRegistrationRequest)
+        public async Task<IdentityResult> RegisterPractitionerAsync(PractitionerRegistrationDTO practitionerRegistrationRequest)
         {
             var user = new ApplicationUser
             {

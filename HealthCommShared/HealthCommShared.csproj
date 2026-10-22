@@ -6,6 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Models\LoginRequestDTO.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="DTOs\LoginRequestDTO.cs" />
+  </ItemGroup>
+
  <ItemGroup>
 	<PackageReference Include="sqlite-net-pcl" Version="1.11.285" />
  </ItemGroup>

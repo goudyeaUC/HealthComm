@@ -1,7 +1,7 @@
 ﻿using Hl7.Fhir.Model;
 using Hl7.Fhir.Rest;
 using Microsoft.AspNetCore.Mvc;
-using HealthCommBackend.DTOs;
+using HealthCommShared.DTOs;
 
 namespace HealthCommBackend.Controllers
 {
