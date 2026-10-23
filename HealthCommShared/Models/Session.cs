@@ -29,9 +29,14 @@ namespace HealthComm.Models
         [Column("Dosage")]
         public string Dosage { get; set; }
 
+        [Column("Email")]
+        public string Email { get; set; }
+
         [Column("is_favorite")]
         public bool IsFavorite { get; set; }
 
         public string FavoriteIcon => IsFavorite ? "★" : "☆";
     }
+
+
 }

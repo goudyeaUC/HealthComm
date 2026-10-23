@@ -125,4 +125,38 @@ public partial class PractitionerDashboardPage : ContentPage
 
 
     }
+
+    private async void appointmentbutton_Clicked(object sender, EventArgs e)
+    {
+        string practitionerId = "";
+        string practitionerName = "";
+        if (sender is Button button &&
+        button.BindingContext is PractitionerNode practitioner)
+        {
+            practitionerId = practitioner.Id;
+            practitionerName = practitioner.Name;
+        }
+            await DisplayAlert(
+                "Practitioner ID",
+                practitionerId,
+                "OK");
+            var myData = new Dictionary<string, object>
+            {
+                { "practitionerid", practitionerId },
+                { "practitionername", practitionerName }
+            };
+        //   }
+        var client = new FhirClient("https://hapi.fhir.org/baseR4");
+
+        Schedule schedule =
+            await client.ReadAsync<Schedule>("Schedule/95178");
+
+        Console.WriteLine($"Schedule ID: {schedule.Id}");
+
+        foreach (var actor in schedule.Actor)
+        {
+            Console.WriteLine($"Actor: {actor.Reference}");
+        }
+        Shell.Current.GoToAsync(nameof(PractionerAppointment),myData);
+    }
 }

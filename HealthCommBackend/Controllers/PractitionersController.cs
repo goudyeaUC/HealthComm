@@ -1,7 +1,8 @@
-﻿using Hl7.Fhir.Model;
+﻿using HealthCommBackend.DTOs;
+using HealthCommShared.DTOs;
+using Hl7.Fhir.Model;
 using Hl7.Fhir.Rest;
 using Microsoft.AspNetCore.Mvc;
-using HealthCommShared.DTOs;
 
 namespace HealthCommBackend.Controllers
 {
@@ -14,7 +15,7 @@ namespace HealthCommBackend.Controllers
         [HttpGet]
         public async Task<IActionResult> GetPractitioners()
         {
-            var practitioners = new List<PractitionerRegistrationDTO>();
+            var practitioners = new List<PractitionerDTO>();
 
             try
             {
@@ -46,7 +47,7 @@ namespace HealthCommBackend.Controllers
                             practitioner?.Name?.FirstOrDefault()?.ToString()
                             ?? "Unknown";
 
-                        practitioners.Add(new PractitionerRegistrationDTO
+                        practitioners.Add(new PractitionerDTO
                         {
                             Id = practitionerId,
                             Name = name

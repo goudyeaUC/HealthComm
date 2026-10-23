@@ -1,12 +1,19 @@
+
+using HealthComm.Models;
+using HealthCommShared.Services;
+
+
 namespace HealthComm;
 
 public partial class LoginPage : ContentPage
 {
-    public LoginPage()
+    private readonly LocalDBService _dbService;
+    public LoginPage(LocalDBService dbService)
     {
         InitializeComponent();
+        _dbService = dbService;
     }
-    private void loginbutton_Clicked(object sender, EventArgs e)
+    private async void loginbutton_Clicked(object sender, EventArgs e)
     {
         ErrorLabel.IsVisible = false;
 
@@ -17,6 +24,17 @@ public partial class LoginPage : ContentPage
             return;
         }
 
+        //      var session = await _dbService.GetSessionByEmail(UserEmail.Text);
+        List<Session> sessions = await _dbService.GetSessions();
+        Session session = sessions.FirstOrDefault(s =>
+            s.Email == UserEmail.Text);
+
+  
+        if (session == null)
+        {
+            ShowError("User not found. Please check your email.");
+            return;
+        } 
         var myData = new Dictionary<string, object>
             {
                 {"username",$"{Username.Text}" },

@@ -5,7 +5,7 @@
              Title="PractitionerDashboardPage">
     <VerticalStackLayout Padding="10" Spacing="5">
 
-        <Grid ColumnDefinitions="*,2*"
+        <Grid ColumnDefinitions="*,3*,2*"
       Padding="10"
       BackgroundColor="LightGray">
             <Label Grid.Column="0"
@@ -14,6 +14,9 @@
             <Label Grid.Column="1"
            Text="Practitioner Name"
            FontAttributes="Bold" />
+            <Label Grid.Column="2"
+            Text="Appointment"
+            FontAttributes="Bold" />
         </Grid>
 
         <CollectionView x:Name="LvPractitioners"
@@ -22,7 +25,7 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid ColumnDefinitions="*,2*"
+                    <Grid ColumnDefinitions="*,3*,2*"
                   Padding="10">
 
                         <Label Grid.Column="0"
@@ -32,6 +35,12 @@
                         <Label Grid.Column="1"
                        Text="{Binding Name}"
                        VerticalOptions="Center" />
+
+                        <Button Grid.Column="3" x:Name="appointmentButton"
+                        Text="AppointmentUI"
+                        HeightRequest="50"
+                        HorizontalOptions="Fill"
+                        Clicked="appointmentbutton_Clicked" />
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

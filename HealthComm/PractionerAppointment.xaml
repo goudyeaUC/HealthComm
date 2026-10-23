@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HealthComm.PractionerAppointment"
+             Title="PractionerAppointment">
+    <Grid RowDefinitions="Auto,*,Auto"
+          Padding="20"
+          RowSpacing="10">
+
+        <!-- Page heading -->
+        <Label Grid.Row="0"
+               Text="Appointment Manager"
+               FontSize="22"
+               FontAttributes="Bold"
+               HorizontalOptions="Center" />
+
+        <!-- Scrollable content -->
+        <Grid Grid.Row="1"
+      RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,*,Auto"
+      RowSpacing="10">
+
+            <Label Grid.Row="0"
+           x:Name="PractitionerIdLabel"
+           Text="Practitioner ID:"
+           FontSize="14"
+           TextColor="Gray" />
+
+            <Label Grid.Row="1"
+           x:Name="PractitionerNameLabel"
+           Text="Practitioner Name:"
+           FontSize="14"
+           TextColor="Gray" />
+
+            <Label Grid.Row="2"
+           Text="Select Appointment Date and Time"
+           FontSize="16"
+           FontAttributes="Bold" />
+
+            <DatePicker Grid.Row="3"
+                x:Name="AppointmentDatePicker"
+                Format="MM/dd/yyyy"
+                DateSelected="AppointmentDatePicker_DateSelected" />
+
+            <TimePicker Grid.Row="4"
+                x:Name="AppointmentTimePicker"
+                Format="hh:mm tt"
+                PropertyChanged="AppointmentTimePicker_PropertyChanged" />
+
+            <Label Grid.Row="5"
+           x:Name="AppointmentInfoLabel"
+           FontSize="14"
+           TextColor="Gray" />
+
+            <Label Grid.Row="6"
+           Text="Select Patient"
+           FontSize="16"
+           FontAttributes="Bold"
+           VerticalOptions="Start" />
+
+            <CollectionView Grid.Row="7"
+                    x:Name="PatientList"
+                    SelectionMode="Single"
+                    VerticalOptions="Fill"
+                    VerticalScrollBarVisibility="Always">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Padding="12"
+                        Margin="0,4"
+                        Stroke="#CCCCCC"
+                        StrokeThickness="1">
+
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="{Binding PatientName}"
+                               FontSize="18"
+                               FontAttributes="Bold" />
+
+                                <Label Text="{Binding Email}"
+                               FontSize="13" />
+
+                                <Label Text="{Binding AppointmentDate,
+                                              StringFormat='Appointment: {0}'}"
+                               FontSize="13" />
+
+                                <Label Text="{Binding VisitType,
+                                              StringFormat='Visit: {0}'}"
+                               FontSize="13" />
+                            </VerticalStackLayout>
+
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </Grid>
+        <!-- OK and Cancel buttons -->
+        <HorizontalStackLayout Grid.Row="2"
+                               HorizontalOptions="Center"
+                               Spacing="20">
+
+            <Button Text="OK"
+                    WidthRequest="120"
+                    BackgroundColor="DarkGreen"
+                    TextColor="White"
+                    Clicked="OkButton_Clicked" />
+
+            <Button Text="Cancel"
+                    WidthRequest="120"
+                    BackgroundColor="DimGray"
+                    TextColor="White"
+                    Clicked="CancelButton_Clicked" />
+
+        </HorizontalStackLayout>
+
+    </Grid>
+</ContentPage>

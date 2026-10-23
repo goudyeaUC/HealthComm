@@ -16,7 +16,26 @@ public partial class AdminPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
+      //  Lv.ItemsSource = null;
         Lv.ItemsSource = await _dbService.GetSessions();
+    }
+
+    private async void exportButton_Clicked(object sender, EventArgs e)
+    {
+        string filePath = await _dbService.ExportSessionsToCsv();
+        await DisplayAlert("Export Complete", $"Sessions exported to {filePath}", "OK");
+    }
+
+    private async void importButton_Clicked(object sender, EventArgs e)
+    {
+      //  int count = await _dbService.ImportSessionsFromCsv();
+        Lv.ItemsSource = null;
+        //  Lv.ItemsSource = await _dbService.GetSessions();
+        Lv.ItemsSource = await _dbService.ImportSessionsFromCsv();
+
+        //  await DisplayAlert("Import Complete", $"Sessions imported  {count} records", "OK");
+        await DisplayAlert("Import Complete", $"Sessions imported  records", "OK");
+
     }
 
     private async void saveButton_Clicked(object sender, EventArgs e)
@@ -26,7 +45,8 @@ public partial class AdminPage : ContentPage
             string.IsNullOrWhiteSpace(visittypeEntry.Text) ||
             string.IsNullOrWhiteSpace(patientnameEntry.Text) ||
             string.IsNullOrWhiteSpace(drugnameEntry.Text) ||
-            string.IsNullOrWhiteSpace(dosageEntry.Text))
+            string.IsNullOrWhiteSpace(dosageEntry.Text) ||
+            string.IsNullOrWhiteSpace(emailEntry.Text))
         {
             await DisplayAlert("Error", "All fields are required.", "OK");
             return;
@@ -40,7 +60,8 @@ public partial class AdminPage : ContentPage
                 VisitType = visittypeEntry.Text,
                 PatientName = patientnameEntry.Text,
                 DrugName = drugnameEntry.Text,
-                Dosage = dosageEntry.Text
+                Dosage = dosageEntry.Text,
+                Email = emailEntry.Text
             });
 
         }
@@ -53,7 +74,8 @@ public partial class AdminPage : ContentPage
                 VisitType = visittypeEntry.Text,
                 PatientName = patientnameEntry.Text,
                 DrugName = drugnameEntry.Text,
-                Dosage = dosageEntry.Text
+                Dosage = dosageEntry.Text,
+                Email = emailEntry.Text
 
             });
             _editSessionId = 0;
@@ -63,6 +85,7 @@ public partial class AdminPage : ContentPage
         patientnameEntry.Text = "";
         drugnameEntry.Text = "";
         dosageEntry.Text = "";
+        emailEntry.Text = "";
         Lv.ItemsSource = await _dbService.GetSessions();
     }
 
@@ -79,6 +102,7 @@ public partial class AdminPage : ContentPage
                 patientnameEntry.Text = session.PatientName;
                 drugnameEntry.Text = session.DrugName;
                 dosageEntry.Text = session.Dosage;
+                emailEntry.Text = session.Email;
                 break;
             case "Delete":
                 await _dbService.Delete(session);
@@ -92,6 +116,11 @@ public partial class AdminPage : ContentPage
         Shell.Current.GoToAsync(nameof(LoginPage));
     }
     private void backButton_Clicked(object sender, EventArgs e)
+    {
+        Shell.Current.GoToAsync("..");
+    }
+
+    private async void appmntMgmntButton_Clicked(object sender, EventArgs e)
     {
         Shell.Current.GoToAsync("..");
     }

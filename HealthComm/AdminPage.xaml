@@ -18,11 +18,56 @@
 
             <Frame Grid.Row="1">
                 <VerticalStackLayout Spacing="12">
-                    <Entry x:Name="patientnameEntry" Placeholder="PatientName"/>
-                    <Entry x:Name="appointmentdateEntry" Placeholder="AppointmentDate"/>
-                    <Entry x:Name="visittypeEntry" Placeholder="VisitType"/>
-                    <Entry x:Name="drugnameEntry" Placeholder="DrugName"/>
-                    <Entry x:Name="dosageEntry" Placeholder="Dosage"/>
+                    <Grid ColumnDefinitions="*,*"
+                      RowDefinitions="Auto,Auto,Auto,Auto"
+                      ColumnSpacing="12"
+                      RowSpacing="12">
+
+                        <Entry x:Name="patientnameEntry"
+                           Placeholder="PatientName"
+                           Grid.Row="0"
+                           Grid.Column="0"/>
+
+                        <Entry x:Name="practionerEntry"
+                           Placeholder="PractionerName"
+                           Grid.Row="0"
+                           Grid.Column="1"/>
+                        
+                        <Entry x:Name="emailEntry"
+                           Placeholder="Email"
+                           Keyboard="Email"
+                           Grid.Row="1"
+                           Grid.Column="0"/>
+
+                        <Entry x:Name="medicalEntry"
+                           Placeholder="Medical Condition"
+                           Grid.Row="1"
+                           Grid.Column="1"/>
+
+                        <Entry x:Name="appointmentdateEntry"
+                           Placeholder="AppointmentDate"
+                           Grid.Row="2"
+                           Grid.Column="1"/>        
+
+                        <Entry x:Name="visittypeEntry"
+                           Placeholder="VisitType"
+                           Grid.Row="2"
+                           Grid.Column="0"/>
+
+                        <Entry x:Name="drugnameEntry"
+                           Placeholder="DrugName"
+                           Grid.Row="3"
+                           Grid.Column="0"/>
+
+                        <Entry x:Name="dosageEntry"
+                           Placeholder="Dosage"
+                           Grid.Row="3"
+                           Grid.Column="1"/>
+
+                        
+
+                    </Grid>
+
                     <Button x:Name="saveButton"
                     Text="Save"
                     HeightRequest="48"
@@ -30,13 +75,37 @@
                 </VerticalStackLayout>
             </Frame>
 
-            <Button Grid.Row="2"
+            <Grid Grid.Row="2"
+              ColumnDefinitions="*,*,*,2*"
+              ColumnSpacing="10"
+              HorizontalOptions="Fill">
+
+                <Button Grid.Column="0"
             Text="Login"
-            WidthRequest="120"
-            HorizontalOptions="Start"
             BackgroundColor="DimGray"
+            TextColor="White"
             Clicked="LoginButton_Clicked" />
 
+                <Button Grid.Column="1"
+            Text="Export"
+            BackgroundColor="DimGray"
+            TextColor="White"
+            Clicked="exportButton_Clicked" />
+
+                <Button Grid.Column="2"
+            Text="Import"
+            BackgroundColor="DimGray"
+            TextColor="White"
+            Clicked="importButton_Clicked" />
+
+                <Button Grid.Column="3"
+            Text="Appointment Management"
+            FontSize="12"
+            BackgroundColor="DimGray"
+            TextColor="White"
+            Clicked="appmntMgmntButton_Clicked" />
+
+            </Grid>
             <Frame Grid.Row="3">
                 <ListView x:Name="Lv"
                   HasUnevenRows="True"
