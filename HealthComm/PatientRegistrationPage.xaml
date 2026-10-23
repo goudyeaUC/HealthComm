@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=netstandard"
+             x:Class="HealthComm.PatientRegistrationPage"
+             Title="Patient Registration">
+    <VerticalStackLayout>
+        <Label Text="Patient Registration" />
+        <Entry x:Name="PatientFirstNameEntry" Placeholder="Enter patient first name" />
+        <Entry x:Name="PatientLastNameEntry" Placeholder="Enter patient last name" />
+        <DatePicker x:Name="PatientDOBPicker" MaximumDate="{x:Static sys:DateTime.Now}" />
+        <Picker x:Name="PatientGenderPicker" Title="Select Gender">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Male</x:String>
+                    <x:String>Female</x:String>
+                    <x:String>Other</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+        <Entry x:Name="PatientEmailEntry" Placeholder="Enter patient email" />
+        <Entry x:Name="PatientPhoneEntry" Placeholder="Enter patient phone number" />
+        <Entry x:Name="PatientPasswordEntry" Placeholder="Enter patient password" />
+    </VerticalStackLayout>
+</ContentPage>
