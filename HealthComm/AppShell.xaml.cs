@@ -4,7 +4,11 @@
     {
         public AppShell()
         {
-            InitializeComponent();
+            InitializeComponent(); 
+            Routing.RegisterRoute(nameof(HealthCommHomePage), typeof(HealthCommHomePage));
+            Routing.RegisterRoute(nameof(PatientRegistrationPage), typeof(PatientRegistrationPage));
+            Routing.RegisterRoute(nameof(PractitionerRegistrationPage), typeof(PractitionerRegistrationPage));
+            Routing.RegisterRoute(nameof(GoalStateLoginPage), typeof(GoalStateLoginPage));
             Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
             Routing.RegisterRoute(nameof(AdminPage), typeof(AdminPage));
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));

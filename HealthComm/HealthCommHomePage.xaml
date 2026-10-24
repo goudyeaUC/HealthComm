@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HealthComm.HealthCommHomePage"
+             Title="HealthCommHomePage">
+    <Grid Padding="30"
+      RowDefinitions="*,Auto,Auto,*"
+      RowSpacing="20">
+
+        <VerticalStackLayout
+        Grid.Row="1"
+        Spacing="12"
+        HorizontalOptions="Center"
+        VerticalOptions="Center">
+
+            <Label Text="HealthComm"
+               FontSize="32"
+               FontAttributes="Bold"
+               HorizontalTextAlignment="Center" />
+
+            <Label Text="Your Healthcare Connection"
+               FontSize="16"
+               HorizontalTextAlignment="Center"
+               TextColor="Gray" />
+
+        </VerticalStackLayout>
+
+        <VerticalStackLayout
+        Grid.Row="2"
+        Spacing="15"
+        MaximumWidthRequest="350"
+        HorizontalOptions="Fill"
+        VerticalOptions="Start">
+
+            <Button Text="Login"
+                HeightRequest="50"
+                CornerRadius="10"
+                Clicked="LoginButton_Clicked" />
+
+            <Button Text="Register Patient"
+                HeightRequest="50"
+                CornerRadius="10"
+                Clicked="RegisterPatientButton_Clicked" />
+
+            <Button Text="Register Practitioner"
+                HeightRequest="50"
+                CornerRadius="10"
+                Clicked="RegisterPractitionerButton_Clicked" />
+
+        </VerticalStackLayout>
+
+    </Grid>
+
+</ContentPage>
