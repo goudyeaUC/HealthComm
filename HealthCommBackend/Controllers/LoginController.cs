@@ -10,12 +10,9 @@ namespace HealthCommBackend.Controllers
 {
     public class LoginController : ControllerBase
     {
-      private readonly IUserRegistrationService _registrationService;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IUserRegistrationService _registrationService;
 
-        public LoginController(IUserRegistrationService registrationService, UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+        public LoginController(IUserRegistrationService registrationService)
         {
             _registrationService = registrationService;
         }
@@ -48,56 +45,6 @@ namespace HealthCommBackend.Controllers
             {
                 return BadRequest(result.Errors);
             }
-        }
-
-        [HttpPost("login")]
-        [AllowAnonymous]
-        public async Task<IActionResult> Login(
-       [FromBody] LoginRequestDTO request)
-        {
-            if (string.IsNullOrWhiteSpace(request.Email) ||
-                string.IsNullOrWhiteSpace(request.GivenPassword))
-            {
-                return BadRequest(new
-                {
-                    message = "Email and password are required."
-                });
-            }
-
-            var user = await _userManager.FindByEmailAsync(
-                request.Email.Trim());
-
-            if (user == null)
-            {
-                return Unauthorized(new
-                {
-                    message = "Invalid email or password."
-                });
-            }
-
-            var result = await _signInManager
-                .CheckPasswordSignInAsync(
-                    user, request.GivenPassword, lockoutOnFailure: true);
-
-            if (!result.Succeeded)
-            {
-                return Unauthorized(new
-                {
-                    message = "Invalid email or password."
-                });
-            }
-
-            var roles = await _userManager.GetRolesAsync(user);
-
-            return Ok(new
-            {
-                message = "Login successful.",
-                userId = user.Id,
-                email = user.Email,
-                firstName = user.FirstName,
-                lastName = user.LastName,
-                roles = roles
-            });
         }
     }
 }
