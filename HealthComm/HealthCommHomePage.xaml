@@ -3,52 +3,112 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HealthComm.HealthCommHomePage"
              Title="HealthCommHomePage">
-    <Grid Padding="30"
-      RowDefinitions="*,Auto,Auto,*"
-      RowSpacing="20">
+    <Frame
+    Grid.Row="2"
+    Padding="20"
+    Margin="10"
+    CornerRadius="15"
+    BorderColor="LightGray"
+    HorizontalOptions="Fill"
+    VerticalOptions="Start">
 
-        <VerticalStackLayout
-        Grid.Row="1"
-        Spacing="12"
-        HorizontalOptions="Center"
-        VerticalOptions="Center">
+        <VerticalStackLayout Spacing="20">
 
-            <Label Text="HealthComm"
-               FontSize="32"
-               FontAttributes="Bold"
-               HorizontalTextAlignment="Center" />
+            <!-- Login and Registration group -->
+            <Grid ColumnSpacing="20">
 
-            <Label Text="Your Healthcare Connection"
-               FontSize="16"
-               HorizontalTextAlignment="Center"
-               TextColor="Gray" />
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Login group -->
+                <Frame
+                Grid.Column="0"
+                Padding="15"
+                CornerRadius="10"
+                BorderColor="LightGray"
+                HorizontalOptions="Fill">
+
+                    <VerticalStackLayout
+                    Spacing="15"
+                    VerticalOptions="Center">
+
+                        <Label
+                        Text="Login"
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center" />
+
+                        <Button
+                        Text="Login"
+                        HeightRequest="50"
+                        CornerRadius="10"
+                        Clicked="LoginButton_Clicked" />
+
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Registration group -->
+                <Frame
+                Grid.Column="1"
+                Padding="15"
+                CornerRadius="10"
+                BorderColor="LightGray"
+                HorizontalOptions="Fill">
+
+                    <VerticalStackLayout Spacing="15">
+
+                        <Label
+                        Text="Registration"
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center" />
+
+                        <Button
+                        Text="Register Patient"
+                        HeightRequest="50"
+                        CornerRadius="10"
+                        Clicked="RegisterPatientButton_Clicked" />
+
+                        <Button
+                        Text="Register Practitioner"
+                        HeightRequest="50"
+                        CornerRadius="10"
+                        Clicked="RegisterPractitionerButton_Clicked" />
+
+                    </VerticalStackLayout>
+                </Frame>
+
+            </Grid>
+
+            <!-- Additional buttons across the bottom -->
+            <Grid ColumnSpacing="20">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button
+                Grid.Column="0"
+                Text="Practitioner Wait Time"
+                HeightRequest="55"
+                CornerRadius="10"
+                HorizontalOptions="Fill"
+                Clicked="PractitionerWaitTimeButton_Clicked" />
+
+                <Button
+                Grid.Column="1"
+                Text="Appointment Manager"
+                HeightRequest="55"
+                CornerRadius="10"
+                HorizontalOptions="Fill"
+                Clicked="AppointmentManagerButton_Clicked" />
+
+            </Grid>
 
         </VerticalStackLayout>
-
-        <VerticalStackLayout
-        Grid.Row="2"
-        Spacing="15"
-        MaximumWidthRequest="350"
-        HorizontalOptions="Fill"
-        VerticalOptions="Start">
-
-            <Button Text="Login"
-                HeightRequest="50"
-                CornerRadius="10"
-                Clicked="LoginButton_Clicked" />
-
-            <Button Text="Register Patient"
-                HeightRequest="50"
-                CornerRadius="10"
-                Clicked="RegisterPatientButton_Clicked" />
-
-            <Button Text="Register Practitioner"
-                HeightRequest="50"
-                CornerRadius="10"
-                Clicked="RegisterPractitionerButton_Clicked" />
-
-        </VerticalStackLayout>
-
-    </Grid>
+    </Frame>
 
 </ContentPage>

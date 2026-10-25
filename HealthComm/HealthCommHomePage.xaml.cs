@@ -6,6 +6,16 @@ public partial class HealthCommHomePage : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private async void PractitionerWaitTimeButton_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new PractitionerDashboardPage());
+    }
+
+    private async void AppointmentManagerButton_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new AppointmentManagerPage());
+    }
     private async void LoginButton_Clicked(
        object sender, EventArgs e)
     {

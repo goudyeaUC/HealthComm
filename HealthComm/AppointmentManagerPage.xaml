@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="HealthComm.AppointmentManagerPage"
+    Title="Appointment Manager">
+
+    <Grid
+        RowDefinitions="Auto,*,Auto"
+        Padding="20"
+        RowSpacing="6">
+
+        <!-- Page heading -->
+        <Label
+            Grid.Row="0"
+            Text="Appointment Manager"
+            FontSize="22"
+            FontAttributes="Bold"
+            HorizontalOptions="Center" />
+
+        <!-- Main content -->
+        <Grid
+            Grid.Row="1"
+            RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,*"
+            RowSpacing="4">
+
+            <Label
+                Grid.Row="0"
+                x:Name="PractitionerIdLabel"
+                Text="Practitioner ID:"
+                FontSize="14"
+                TextColor="Gray" />
+
+            <Label
+                Grid.Row="1"
+                x:Name="PractitionerNameLabel"
+                Text="Practitioner Name:"
+                FontSize="14"
+                TextColor="Gray" />
+
+            <Label
+                Grid.Row="2"
+                Text="Select Appointment Date and Time"
+                FontSize="16"
+                FontAttributes="Bold" />
+
+            <DatePicker
+                Grid.Row="3"
+                x:Name="AppointmentDatePicker"
+                Format="MM/dd/yyyy"
+                DateSelected="AppointmentDatePicker_DateSelected" />
+
+            <TimePicker
+                Grid.Row="4"
+                x:Name="AppointmentTimePicker"
+                Format="hh:mm tt"
+                PropertyChanged="AppointmentTimePicker_PropertyChanged" />
+
+            <Label
+                Grid.Row="5"
+                x:Name="AppointmentInfoLabel"
+                FontSize="14"
+                TextColor="Gray" />
+
+            <!-- Patients heading -->
+            <Label
+                Grid.Row="6"
+                Text="Select Patient"
+                FontSize="16"
+                FontAttributes="Bold"
+                Margin="0,2,0,0"
+                VerticalOptions="End" />
+
+            <!-- Scrollable appointment list -->
+            <CollectionView
+                Grid.Row="7"
+                x:Name="PatientList"
+                ItemsSource="{Binding Appointments}"
+                SelectionMode="Single"
+                VerticalOptions="Fill"
+                VerticalScrollBarVisibility="Always">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border
+                            Padding="12"
+                            Margin="0,2"
+                            Stroke="#CCCCCC"
+                            StrokeThickness="1">
+
+                            <VerticalStackLayout Spacing="4">
+
+                                <Label
+                                    Text="{Binding Id,
+                                        StringFormat='Appointment ID: {0}'}"
+                                    FontSize="18"
+                                    FontAttributes="Bold" />
+
+                                <Label
+                                    Text="{Binding PatientProfileId,
+                                        StringFormat='Patient ID: {0}'}"
+                                    FontSize="13" />
+
+                                <Label
+                                    Text="{Binding PractitionerProfileId,
+                                        StringFormat='Practitioner ID: {0}'}"
+                                    FontSize="13" />
+
+                                <Label
+                                    Text="{Binding StartDateTime,
+                                        StringFormat='Appointment: {0:MMM dd, yyyy h:mm tt}'}"
+                                    FontSize="13" />
+
+                                <Label
+                                    Text="{Binding EndDateTime,
+                                        StringFormat='End: {0:MMM dd, yyyy h:mm tt}'}"
+                                    FontSize="13" />
+
+                                <Label
+                                    Text="{Binding VisitType,
+                                        StringFormat='Visit: {0}'}"
+                                    FontSize="13" />
+
+                                <Label
+                                    Text="{Binding Status,
+                                        StringFormat='Status: {0}'}"
+                                    FontSize="13" />
+
+                                <Label
+                                    Text="{Binding Description,
+                                        StringFormat='Description: {0}'}"
+                                    FontSize="13"
+                                    LineBreakMode="WordWrap" />
+
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </Grid>
+
+        <!-- OK and Cancel buttons -->
+        <HorizontalStackLayout
+            Grid.Row="2"
+            HorizontalOptions="Center"
+            Spacing="20">
+
+            <Button
+                Text="OK"
+                WidthRequest="120"
+                BackgroundColor="DarkGreen"
+                TextColor="White"
+                Clicked="OkButton_Clicked" />
+
+            <Button
+                Text="Cancel"
+                WidthRequest="120"
+                BackgroundColor="DimGray"
+                TextColor="White"
+                Clicked="CancelButton_Clicked" />
+
+        </HorizontalStackLayout>
+
+    </Grid>
+</ContentPage>
