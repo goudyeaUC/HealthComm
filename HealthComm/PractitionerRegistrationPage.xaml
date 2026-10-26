@@ -5,8 +5,16 @@
              Title="Practitioner Registration">
     <VerticalStackLayout>
         <Label Text="Practitioner Registration" />
-        <Entry x:Name="PractitionerFirstNameEntry" Placeholder="Enter practitioner first name" />
-        <Entry x:Name="PractitionerLastNameEntry" Placeholder="Enter practitioner last name" />
-        <Entry x:Name="PractitionerSpecialty" Placeholder="Enter practitioner specialty" />
+        <Label Text="First Name" />
+        <Entry x:Name="PractitionerFirstNameEntry" Placeholder="Enter first name" />
+        <Label Text="Last Name" />
+        <Entry x:Name="PractitionerLastNameEntry" Placeholder="Enter last name" />
+        <Label Text="Specialty" />
+        <Entry x:Name="PractitionerSpecialty" Placeholder="Enter specialty" />
+        <Label Text="Email" />
+        <Entry x:Name="PractitionerEmailEntry" Placeholder="Enter email address" />
+        <Label Text="Phone Number" />
+        <Entry x:Name="PractitionerPhoneEntry" Placeholder="Enter phone number" />
+
     </VerticalStackLayout>
 </ContentPage>
