@@ -9,6 +9,8 @@
         <Entry x:Name="PractitionerFirstNameEntry" Placeholder="Enter first name" />
         <Label Text="Last Name" />
         <Entry x:Name="PractitionerLastNameEntry" Placeholder="Enter last name" />
+        <Label Text="Date of Birth" />
+        <DatePicker x:Name="PractitionerDOBPicker" MaximumDate="{x:Static sys:DateTime.Now}" />
         <Label Text="Specialty" />
         <Entry x:Name="PractitionerSpecialty" Placeholder="Enter specialty" />
         <Label Text="Email" />

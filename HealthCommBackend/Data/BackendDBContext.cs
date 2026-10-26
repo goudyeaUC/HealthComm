@@ -14,6 +14,7 @@ namespace HealthCommBackend.Data
 
         public DbSet<PractitionerProfile> Practitioners { get; set; }
         public DbSet<PatientProfile> Patients { get; set; }
+        public DbSet<Prescription> Prescriptions { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -29,6 +30,17 @@ namespace HealthCommBackend.Data
                 .HasOne(a => a.PractitionerProfile)
                 .WithOne(p => p.UnderlyingUserKey)
                 .HasForeignKey<PractitionerProfile>(p => p.Id);
+
+            //Configure the one-to-many relationship between PractitionerProfile and Prescription
+            modelBuilder.Entity<Prescription>()
+                .HasOne(p => p.Prescriber)
+  
+
+            //Configure the one-to-many relationship between PatientProfile and Prescription
+            //modelBuilder.Entity<Prescription>()
+                //.HasOne(p => p.PatientProfile)
+                //.WithMany(p => p.Prescriptions)
+                //.HasForeignKey(p => p.PatientProfileId);
 
             //Enforce unique keys
             modelBuilder.Entity<PatientProfile>()
