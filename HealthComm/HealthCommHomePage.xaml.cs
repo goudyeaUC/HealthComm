@@ -33,4 +33,11 @@ public partial class HealthCommHomePage : ContentPage
     {
         await Shell.Current.GoToAsync(nameof(PatientRegistrationPage));
     }
+
+
+    private async void PractitionerPatientAssignmentUIButton_Clicked(
+       object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(PractitionerPatientAssignmentPage));
+    }
 }

@@ -1,8 +1,9 @@
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
 using HealthCommBackend.Data;
 using HealthCommBackend.Models;
+using HealthCommBackend.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +21,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<BackendDBContext>()
     .AddSignInManager();
 
-
+builder.Services.AddScoped<PatientAppointmentService>();
 
 var app = builder.Build();
 

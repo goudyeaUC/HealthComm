@@ -36,6 +36,14 @@ namespace HealthCommBackend.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("INTEGER");
 
@@ -79,6 +87,311 @@ namespace HealthCommBackend.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "patient-user-001",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "static-concurrency-patient-001",
+                            Email = "alex.johnson@example.com",
+                            EmailConfirmed = true,
+                            FirstName = "Alex",
+                            LastName = "Johnson",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ALEX.JOHNSON@EXAMPLE.COM",
+                            NormalizedUserName = "ALEX.JOHNSON@EXAMPLE.COM",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "static-security-patient-001",
+                            TwoFactorEnabled = false,
+                            UserName = "alex.johnson@example.com"
+                        },
+                        new
+                        {
+                            Id = "patient-user-002",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "static-concurrency-patient-002",
+                            Email = "emily.davis@example.com",
+                            EmailConfirmed = true,
+                            FirstName = "Emily",
+                            LastName = "Davis",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "EMILY.DAVIS@EXAMPLE.COM",
+                            NormalizedUserName = "EMILY.DAVIS@EXAMPLE.COM",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "static-security-patient-002",
+                            TwoFactorEnabled = false,
+                            UserName = "emily.davis@example.com"
+                        },
+                        new
+                        {
+                            Id = "practitioner-user-001",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "static-concurrency-practitioner-001",
+                            Email = "jane.smith@example.com",
+                            EmailConfirmed = true,
+                            FirstName = "Jane",
+                            LastName = "Smith",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "JANE.SMITH@EXAMPLE.COM",
+                            NormalizedUserName = "JANE.SMITH@EXAMPLE.COM",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "static-security-practitioner-001",
+                            TwoFactorEnabled = false,
+                            UserName = "jane.smith@example.com"
+                        },
+                        new
+                        {
+                            Id = "practitioner-user-002",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "static-concurrency-practitioner-002",
+                            Email = "john.williams@example.com",
+                            EmailConfirmed = true,
+                            FirstName = "John",
+                            LastName = "Williams",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "JOHN.WILLIAMS@EXAMPLE.COM",
+                            NormalizedUserName = "JOHN.WILLIAMS@EXAMPLE.COM",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "static-security-practitioner-002",
+                            TwoFactorEnabled = false,
+                            UserName = "john.williams@example.com"
+                        });
+                });
+
+            modelBuilder.Entity("HealthCommBackend.Models.PatientAppointment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PatientProfileId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PractitionerProfileId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("StartDateTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("VisitType")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PatientAppointment");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            PatientProfileId = 1,
+                            PractitionerProfileId = 1,
+                            StartDateTime = new DateTime(2026, 11, 2, 10, 0, 0, 0, DateTimeKind.Utc),
+                            VisitType = "Cardiology Consultation"
+                        });
+                });
+
+            modelBuilder.Entity("HealthCommBackend.Models.PatientProfile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("AdministrativeGender")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FHIRIdentifier")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("LastSyncedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Patients");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AdministrativeGender = "male",
+                            DateOfBirth = new DateTime(1995, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "alex.johnson@example.com",
+                            FHIRIdentifier = "patient-1001",
+                            FirstName = "Alex",
+                            LastName = "Johnson",
+                            PhoneNumber = "5551234567",
+                            UserId = "patient-user-001"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AdministrativeGender = "female",
+                            DateOfBirth = new DateTime(1998, 8, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "emily.davis@example.com",
+                            FHIRIdentifier = "patient-1002",
+                            FirstName = "Emily",
+                            LastName = "Davis",
+                            PhoneNumber = "5559876543",
+                            UserId = "patient-user-002"
+                        });
+                });
+
+            modelBuilder.Entity("HealthCommBackend.Models.PractitionerProfile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("LastSyncedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Specialty")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Practitioners");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DateOfBirth = new DateTime(1980, 4, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "jane.smith@example.com",
+                            FirstName = "Jane",
+                            IsActive = true,
+                            LastName = "Smith",
+                            PhoneNumber = "5551234567",
+                            Specialty = "Cardiology",
+                            UserId = "practitioner-user-001"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DateOfBirth = new DateTime(1975, 9, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "john.williams@example.com",
+                            FirstName = "John",
+                            IsActive = true,
+                            LastName = "Williams",
+                            PhoneNumber = "5559876543",
+                            Specialty = "Family Medicine",
+                            UserId = "practitioner-user-002"
+                        });
+                });
+
+            modelBuilder.Entity("HealthCommBackend.Models.Prescription", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ActiveStatus")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("DateFilled")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("DatePrescribed")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("ExpirationDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Instructions")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("LastSyncedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("MedicationName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PatientId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PrescriberId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ReasonForPrescription")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("RefillsRemaining")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("SNOMEDDrugCode")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SNOMEDReasonCode")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PatientId");
+
+                    b.HasIndex("PrescriberId");
+
+                    b.ToTable("Prescriptions");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -209,6 +522,43 @@ namespace HealthCommBackend.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("HealthCommBackend.Models.PatientProfile", b =>
+                {
+                    b.HasOne("HealthCommBackend.Models.ApplicationUser", "UnderlyingUserKey")
+                        .WithOne("PatientProfile")
+                        .HasForeignKey("HealthCommBackend.Models.PatientProfile", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UnderlyingUserKey");
+                });
+
+            modelBuilder.Entity("HealthCommBackend.Models.PractitionerProfile", b =>
+                {
+                    b.HasOne("HealthCommBackend.Models.ApplicationUser", "UnderlyingUserKey")
+                        .WithOne("PractitionerProfile")
+                        .HasForeignKey("HealthCommBackend.Models.PractitionerProfile", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UnderlyingUserKey");
+                });
+
+            modelBuilder.Entity("HealthCommBackend.Models.Prescription", b =>
+                {
+                    b.HasOne("HealthCommBackend.Models.ApplicationUser", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId");
+
+                    b.HasOne("HealthCommBackend.Models.ApplicationUser", "Prescriber")
+                        .WithMany()
+                        .HasForeignKey("PrescriberId");
+
+                    b.Navigation("Patient");
+
+                    b.Navigation("Prescriber");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -258,6 +608,13 @@ namespace HealthCommBackend.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("HealthCommBackend.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("PatientProfile");
+
+                    b.Navigation("PractitionerProfile");
                 });
 #pragma warning restore 612, 618
         }
