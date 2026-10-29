@@ -33,7 +33,7 @@ namespace HealthCommBackend.Data
 
             //Configure the one-to-many relationship between PractitionerProfile and Prescription
             modelBuilder.Entity<Prescription>()
-                .HasOne(p => p.Prescriber)
+                .HasOne(p => p.Prescriber);
   
 
             //Configure the one-to-many relationship between PatientProfile and Prescription
