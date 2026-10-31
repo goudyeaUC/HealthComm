@@ -1,0 +1,6 @@
+@HealthCommBackend_HostAddress = http://localhost:5167
+
+GET {{HealthCommBackend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

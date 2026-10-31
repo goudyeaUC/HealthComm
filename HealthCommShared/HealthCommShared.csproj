@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\LoginRequestDTO.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="DTOs\LoginRequestDTO.cs" />
+  </ItemGroup>
+
+ <ItemGroup>
+	<PackageReference Include="sqlite-net-pcl" Version="1.11.285" />
+ </ItemGroup>
+</Project>

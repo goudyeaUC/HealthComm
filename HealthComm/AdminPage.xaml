@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HealthComm.AdminPage"
+             Title="AdminPage">
+    <ScrollView>
+        <Grid Padding="20"
+      RowSpacing="16"
+      RowDefinitions="Auto,Auto,Auto,*">
+            <VerticalStackLayout Grid.Row="0"
+                         Spacing="6">
+                <Label Text="Admin"
+               FontSize="28"
+               FontAttributes="Bold" />
+                <Label Text="Add or update data."
+               TextColor="DimGray" />
+            </VerticalStackLayout>
+
+            <Frame Grid.Row="1">
+                <VerticalStackLayout Spacing="12">
+                    <Grid ColumnDefinitions="*,*"
+                      RowDefinitions="Auto,Auto,Auto,Auto"
+                      ColumnSpacing="12"
+                      RowSpacing="12">
+
+                        <Entry x:Name="patientnameEntry"
+                           Placeholder="PatientName"
+                           Grid.Row="0"
+                           Grid.Column="0"/>
+
+                        <Entry x:Name="practionerEntry"
+                           Placeholder="PractionerName"
+                           Grid.Row="0"
+                           Grid.Column="1"/>
+                        
+                        <Entry x:Name="emailEntry"
+                           Placeholder="Email"
+                           Keyboard="Email"
+                           Grid.Row="1"
+                           Grid.Column="0"/>
+
+                        <Entry x:Name="medicalEntry"
+                           Placeholder="Medical Condition"
+                           Grid.Row="1"
+                           Grid.Column="1"/>
+
+                        <Entry x:Name="appointmentdateEntry"
+                           Placeholder="AppointmentDate"
+                           Grid.Row="2"
+                           Grid.Column="1"/>        
+
+                        <Entry x:Name="visittypeEntry"
+                           Placeholder="VisitType"
+                           Grid.Row="2"
+                           Grid.Column="0"/>
+
+                        <Entry x:Name="drugnameEntry"
+                           Placeholder="DrugName"
+                           Grid.Row="3"
+                           Grid.Column="0"/>
+
+                        <Entry x:Name="dosageEntry"
+                           Placeholder="Dosage"
+                           Grid.Row="3"
+                           Grid.Column="1"/>
+
+                        
+
+                    </Grid>
+
+                    <Button x:Name="saveButton"
+                    Text="Save"
+                    HeightRequest="48"
+                    Clicked="saveButton_Clicked"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Grid Grid.Row="2"
+              ColumnDefinitions="*,*,*,2*"
+              ColumnSpacing="10"
+              HorizontalOptions="Fill">
+
+                <Button Grid.Column="0"
+            Text="Login"
+            BackgroundColor="DimGray"
+            TextColor="White"
+            Clicked="LoginButton_Clicked" />
+
+                <Button Grid.Column="1"
+            Text="Export"
+            BackgroundColor="DimGray"
+            TextColor="White"
+            Clicked="exportButton_Clicked" />
+
+                <Button Grid.Column="2"
+            Text="Import"
+            BackgroundColor="DimGray"
+            TextColor="White"
+            Clicked="importButton_Clicked" />
+
+                <Button Grid.Column="3"
+            Text="Appointment Management"
+            FontSize="12"
+            BackgroundColor="DimGray"
+            TextColor="White"
+            Clicked="appmntMgmntButton_Clicked" />
+
+            </Grid>
+            <Frame Grid.Row="3">
+                <ListView x:Name="Lv"
+                  HasUnevenRows="True"
+                  ItemTapped="Lv_ItemTapped">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <VerticalStackLayout Padding="8"
+                                             Spacing="6">
+                                    <Label Text="{Binding PatientName}"
+                                   FontSize="18"
+                                   FontAttributes="Bold"/>
+                                    <Label Text="{Binding AppointmentDate}"
+                                   TextColor="DimGray"/>
+                                    <Label Text="{Binding VisitType}"
+                                   LineBreakMode="TailTruncation"/>
+                                </VerticalStackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Frame>
+        </Grid>
+    </ScrollView>
+</ContentPage>

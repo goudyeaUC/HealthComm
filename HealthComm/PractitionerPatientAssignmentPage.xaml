@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HealthComm.PractitionerPatientAssignmentPage"
+             Title="PractitionerPatientAssignmentPage">
+
+    <Grid
+    RowDefinitions="Auto,*,Auto"
+    Padding="20"
+    RowSpacing="6">
+
+        <Label
+        Grid.Row="0"
+        Text="Appointment Manager"
+        FontSize="22"
+        FontAttributes="Bold"
+        HorizontalOptions="Center" />
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="10">
+
+                <Label
+                Text="Select Patient ID"
+                FontSize="16"
+                FontAttributes="Bold" />
+
+                <Picker
+                x:Name="PatientPicker"
+                Title="Select Patient"
+                ItemDisplayBinding="{Binding Id}"
+                SelectedIndexChanged="PatientPicker_SelectedIndexChanged" />
+
+                <Label
+                x:Name="PatientInfoLabel"
+                Text="Patient details will appear here."
+                FontSize="13"
+                TextColor="Gray" />
+
+                <Label
+                Text="Select Practitioner ID"
+                FontSize="16"
+                FontAttributes="Bold" />
+
+                <Picker
+                x:Name="PractitionerPicker"
+                Title="Select Practitioner"
+                ItemDisplayBinding="{Binding Id}"
+                SelectedIndexChanged="PractitionerPicker_SelectedIndexChanged" />
+
+                <Label
+                x:Name="PractitionerNameLabel"
+                Text="Practitioner details will appear here."
+                FontSize="13"
+                TextColor="Gray" />
+
+                <Label
+                Text="Select Appointment Date and Time"
+                FontSize="16"
+                FontAttributes="Bold" />
+
+                <DatePicker
+                x:Name="AppointmentDatePicker"
+                Format="MM/dd/yyyy"
+                DateSelected="AppointmentDatePicker_DateSelected" />
+
+                <TimePicker
+                x:Name="AppointmentTimePicker"
+                Format="hh:mm tt"
+                PropertyChanged="AppointmentTimePicker_PropertyChanged" />
+
+                <Label
+                x:Name="AppointmentInfoLabel"
+                FontSize="14"
+                TextColor="Gray" />
+
+                <Label
+                Text="Existing Appointments"
+                FontSize="16"
+                FontAttributes="Bold" />
+
+                <CollectionView
+                x:Name="PatientList"
+                SelectionMode="Single"
+                HeightRequest="300"
+                VerticalScrollBarVisibility="Always">
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border
+                            Padding="12"
+                            Margin="0,2"
+                            Stroke="#CCCCCC"
+                            StrokeThickness="1">
+
+                                <VerticalStackLayout Spacing="4">
+                                    <Label
+                                    Text="{Binding Id,
+                                        StringFormat='Appointment ID: {0}'}"
+                                    FontSize="18"
+                                    FontAttributes="Bold" />
+
+                                    <Label
+                                    Text="{Binding PatientProfileId,
+                                        StringFormat='Patient ID: {0}'}"
+                                    FontSize="13" />
+
+                                    <Label
+                                    Text="{Binding PractitionerProfileId,
+                                        StringFormat='Practitioner ID: {0}'}"
+                                    FontSize="13" />
+
+                                    <Label
+                                    Text="{Binding StartDateTime,
+                                        StringFormat='Appointment: {0:MMM dd, yyyy h:mm tt}'}"
+                                    FontSize="13" />
+
+                                    <Label
+                                    Text="{Binding EndDateTime,
+                                        StringFormat='End: {0:MMM dd, yyyy h:mm tt}'}"
+                                    FontSize="13" />
+
+                                    <Label
+                                    Text="{Binding VisitType,
+                                        StringFormat='Visit: {0}'}"
+                                    FontSize="13" />
+
+                                    <Label
+                                    Text="{Binding Status,
+                                        StringFormat='Status: {0}'}"
+                                    FontSize="13" />
+
+                                    <Label
+                                    Text="{Binding Description,
+                                        StringFormat='Description: {0}'}"
+                                    FontSize="13"
+                                    LineBreakMode="WordWrap" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <HorizontalStackLayout
+        Grid.Row="2"
+        HorizontalOptions="Center"
+        Spacing="20">
+
+            <Button
+            Text="OK"
+            WidthRequest="120"
+            BackgroundColor="DarkGreen"
+            TextColor="White"
+            Clicked="OkButton_Clicked" />
+
+            <Button
+            Text="Cancel"
+            WidthRequest="120"
+            BackgroundColor="DimGray"
+            TextColor="White"
+            Clicked="CancelButton_Clicked" />
+
+        </HorizontalStackLayout>
+    </Grid>
+
+</ContentPage>
