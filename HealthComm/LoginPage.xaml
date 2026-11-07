@@ -55,8 +55,20 @@
                         HeightRequest="50"
                         HorizontalOptions="Fill"
                         Clicked="guestbutton_Clicked" />
-
                         
+                        <Button x:Name="RegisterPatientButton"
+                                Text="Register a new Patient"
+                                HeightRequest="50"
+                                HorizontalOptions="Fill"
+                                Clicked="RegisterPatientButton_Clicked" />
+
+                        <Button x:Name="RegisterPractitionerButton"
+                                Text="Register a new Practitioner"
+                                HeightRequest="50"
+                                HorizontalOptions="Fill"
+                                Clicked="RegisterPractitionerButton_Clicked" />
+
+
                     </VerticalStackLayout>
                 </Frame>
                 <Button 
