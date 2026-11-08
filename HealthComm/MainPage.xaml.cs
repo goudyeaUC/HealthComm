@@ -15,9 +15,15 @@ namespace HealthComm
             BindingContext =
             new PatientDashboardViewModel();
         }
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
+
+            if (BindingContext is PatientDashboardViewModel vm)
+            {
+                await vm.LoadPrescriptionsAsync(UserEmail);
+            }
+
             // Add blank line after the text
 
             string displayName = string.IsNullOrWhiteSpace(User_Name)
