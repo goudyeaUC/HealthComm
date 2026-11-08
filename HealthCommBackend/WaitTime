@@ -1,0 +1,115 @@
+const hospitals = [
+  {
+    name: "Good Samaritan Hospital",
+    location: "Clifton, Cincinnati"
+  },
+  {
+    name: "Bethesda North Hospital",
+    location: "Montgomery, Cincinnati"
+  },
+  {
+    name: "Good Samaritan Western Ridge",
+    location: "West Side, Cincinnati"
+  },
+  {
+    name: "UC Medical Center",
+    location: "Clifton, Cincinnati"
+  },
+  {
+    name: "The Christ Hospital",
+    location: "Mount Auburn, Cincinnati"
+  },
+  {
+    name: "Mercy Health - Anderson Hospital",
+    location: "Anderson Township"
+  },
+  {
+    name: "Mercy Health - West Hospital",
+    location: "Western Cincinnati"
+  },
+];
+
+// Generate a random demo wait between 5 and 120 minutes.
+function generateWaitTime() {
+  return Math.floor(Math.random() * 116) + 5;
+}
+
+// Assign each hospital a demo wait time.
+function refreshWaitTimes() {
+  hospitals.forEach(hospital => {
+    hospital.wait = generateWaitTime();
+  });
+
+  displayHospitals();
+}
+
+function displayHospitals() {
+  const list = document.getElementById("hospital-list");
+  const search = document
+    .getElementById("search")
+    .value.toLowerCase();
+
+  const sort = document.getElementById("sort").value;
+
+  let results = hospitals.filter(hospital =>
+    hospital.name.toLowerCase().includes(search) ||
+    hospital.location.toLowerCase().includes(search)
+  );
+
+  if (sort === "wait") {
+    results.sort((a, b) => a.wait - b.wait);
+  } else if (sort === "longest") {
+    results.sort((a, b) => b.wait - a.wait);
+  } else {
+    results.sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  list.innerHTML = "";
+
+  results.forEach(hospital => {
+    const row = document.createElement("tr");
+
+    let waitClass = "medium";
+
+    if (hospital.wait < 30) {
+      waitClass = "short";
+    } else if (hospital.wait >= 60) {
+      waitClass = "long";
+    }
+
+    row.innerHTML = `
+      <td>${hospital.name}</td>
+      <td>${hospital.location}</td>
+      <td class="wait ${waitClass}">
+        ${hospital.wait} minutes
+      </td>
+      <td>Simulated</td>
+    `;
+
+    list.appendChild(row);
+  });
+
+  document.getElementById("count").textContent =
+    `Showing ${results.length} of ${hospitals.length} hospitals`;
+}
+
+// Search hospitals as the user types.
+document.getElementById("search").addEventListener(
+  "input",
+  displayHospitals
+);
+
+// Change sorting method.
+document.getElementById("sort").addEventListener(
+  "change",
+  displayHospitals
+);
+
+// Generate a new set of random demo wait times.
+document.getElementById("refresh").addEventListener(
+  "click",
+  refreshWaitTimes
+);
+
+// Show the initial list.
+refreshWaitTimes();
