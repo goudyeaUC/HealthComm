@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:HealthComm.ViewModels"
              x:Class="HealthComm.MainPage">
 
     <ScrollView>
@@ -52,11 +53,21 @@
                         <Label Text="My Prescriptions"
                    FontAttributes="Bold"/>
 
+                        <Label Text="{Binding PrescriptionStatus}" TextColor="Gray"/>
+
                         <CollectionView ItemsSource="{Binding Prescriptions}">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <Frame Margin="0,5">
-                                        <Label Text="{Binding DisplayText}"/>
+                                        <VerticalStackLayout>
+                                            <Label Text="{Binding DisplayText}"/>
+                                            <Label Text="{Binding DetailText}" FontSize="12" TextColor="Gray"/>
+                                            <Label Text="{Binding RefillText}" FontSize="12" TextColor="DarkOrange"/>
+                                            <Button Text="Request Refill"
+                                                    IsEnabled="{Binding CanRequestRefill}"
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PatientDashboardViewModel}}, Path=RequestRefillCommand}"
+                                                    CommandParameter="{Binding .}"/>
+                                        </VerticalStackLayout>
                                     </Frame>
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
