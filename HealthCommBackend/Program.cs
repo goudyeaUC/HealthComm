@@ -22,6 +22,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddSignInManager();
 
 builder.Services.AddScoped<PatientAppointmentService>();
+builder.Services.AddScoped<MedicationRecordService>();
 
 var app = builder.Build();
 
@@ -37,7 +38,11 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.MapGroup("/identity").MapIdentityApi<ApplicationUser>();
+//TODO - Following is commented to resolve backend not running
+//with the error "Unhandled exception. System.InvalidOperationException: No service
+//for type 'Microsoft.AspNetCore.Identity.IEmailSender`1[HealthCommBackend.Models.ApplicationUser]' has been registered."
+
+// app.MapGroup("/identity").MapIdentityApi<ApplicationUser>();
 
 app.MapControllers();
 

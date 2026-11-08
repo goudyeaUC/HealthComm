@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthCommBackend.Migrations
 {
     [DbContext(typeof(BackendDBContext))]
-    [Migration("20261029205406_InitialCreate")]
+    [Migration("20261108162601_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -159,6 +159,80 @@ namespace HealthCommBackend.Migrations
                             SecurityStamp = "static-security-practitioner-002",
                             TwoFactorEnabled = false,
                             UserName = "john.williams@example.com"
+                        });
+                });
+
+            modelBuilder.Entity("HealthCommBackend.Models.MedicationRecord", b =>
+                {
+                    b.Property<int>("MedicationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Dosage")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("ExpirationDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Instructions")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("MedicationName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("PrescribedBy")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Refills")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("StartDate")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("MedicationId");
+
+                    b.ToTable("MedicationRecord");
+
+                    b.HasData(
+                        new
+                        {
+                            MedicationId = 1,
+                            CreatedDate = new DateTime(2026, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Dosage = "500 mg",
+                            EndDate = new DateTime(2026, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ExpirationDate = new DateTime(2027, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Instructions = "Take one capsule three times daily",
+                            MedicationName = "Amoxicillin",
+                            PatientId = 1,
+                            PrescribedBy = "Dr. Smith",
+                            Refills = 2,
+                            StartDate = new DateTime(2026, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            MedicationId = 2,
+                            CreatedDate = new DateTime(2026, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Dosage = "200 mg",
+                            ExpirationDate = new DateTime(2027, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Instructions = "Take one tablet every 6 hours as needed",
+                            MedicationName = "Ibuprofen",
+                            PatientId = 1,
+                            PrescribedBy = "Dr. Smith",
+                            Refills = 1,
+                            StartDate = new DateTime(2026, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 

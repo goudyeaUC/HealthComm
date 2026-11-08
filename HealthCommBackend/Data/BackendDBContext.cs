@@ -17,6 +17,8 @@ namespace HealthCommBackend.Data
         public DbSet<Prescription> Prescriptions { get; set; }
         public DbSet<PatientAppointment> PatientAppointment { get; set; }
 
+        public DbSet<MedicationRecord> MedicationRecord { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite($"Data Source=HealthComm.db");
@@ -54,7 +56,8 @@ namespace HealthCommBackend.Data
             modelBuilder.Entity<PractitionerProfile>()
                 .HasIndex(p => p.UserId)
                 .IsUnique();
-
+            modelBuilder.Entity<MedicationRecord>()
+            .HasKey(m => m.MedicationId);
             modelBuilder.Entity<ApplicationUser>().HasData(
                 new ApplicationUser
                 {
@@ -184,13 +187,41 @@ namespace HealthCommBackend.Data
             }
             );
 
-
+            modelBuilder.Entity<MedicationRecord>().HasData(
+            new
+            {
+                MedicationId = 1,
+                PatientId = 1,
+                MedicationName = "Amoxicillin",
+                Dosage = "500 mg",
+                Instructions = "Take one capsule three times daily",
+                Refills = 2,
+                ExpirationDate = (DateTime?)new DateTime(2027, 5, 15),
+                StartDate = (DateTime?)new DateTime(2026, 11, 1),
+                EndDate = (DateTime?)new DateTime(2026, 11, 10),
+                PrescribedBy = "Dr. Smith",
+                CreatedDate = new DateTime(2026, 11, 1)
+            },
+            new
+            {
+                MedicationId = 2,
+                PatientId = 1,
+                MedicationName = "Ibuprofen",
+                Dosage = "200 mg",
+                Instructions = "Take one tablet every 6 hours as needed",
+                Refills = 1,
+                ExpirationDate = (DateTime?)new DateTime(2027, 8, 20),
+                StartDate = (DateTime?)new DateTime(2026, 11, 1),
+                EndDate = (DateTime?)null,
+                PrescribedBy = "Dr. Smith",
+                CreatedDate = new DateTime(2026, 11, 1)
+            }
+            );
         }
 
     }
 
-
-
-
 }
+
+
 

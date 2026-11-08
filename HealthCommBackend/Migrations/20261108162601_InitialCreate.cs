@@ -55,6 +55,28 @@ namespace HealthCommBackend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "MedicationRecord",
+                columns: table => new
+                {
+                    MedicationId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    PatientId = table.Column<int>(type: "INTEGER", nullable: false),
+                    MedicationName = table.Column<string>(type: "TEXT", nullable: false),
+                    Dosage = table.Column<string>(type: "TEXT", nullable: false),
+                    Instructions = table.Column<string>(type: "TEXT", nullable: false),
+                    Refills = table.Column<int>(type: "INTEGER", nullable: false),
+                    ExpirationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    StartDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    EndDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    PrescribedBy = table.Column<string>(type: "TEXT", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MedicationRecord", x => x.MedicationId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PatientAppointment",
                 columns: table => new
                 {
@@ -277,6 +299,15 @@ namespace HealthCommBackend.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "MedicationRecord",
+                columns: new[] { "MedicationId", "CreatedDate", "Dosage", "EndDate", "ExpirationDate", "Instructions", "MedicationName", "PatientId", "PrescribedBy", "Refills", "StartDate" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2026, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "500 mg", new DateTime(2026, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2027, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Take one capsule three times daily", "Amoxicillin", 1, "Dr. Smith", 2, new DateTime(2026, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, new DateTime(2026, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "200 mg", null, new DateTime(2027, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Take one tablet every 6 hours as needed", "Ibuprofen", 1, "Dr. Smith", 1, new DateTime(2026, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                });
+
+            migrationBuilder.InsertData(
                 table: "PatientAppointment",
                 columns: new[] { "Id", "PatientProfileId", "PractitionerProfileId", "StartDateTime", "VisitType" },
                 values: new object[] { 1, 1, 1, new DateTime(2026, 11, 2, 10, 0, 0, 0, DateTimeKind.Utc), "Cardiology Consultation" });
@@ -376,6 +407,9 @@ namespace HealthCommBackend.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "MedicationRecord");
 
             migrationBuilder.DropTable(
                 name: "PatientAppointment");
