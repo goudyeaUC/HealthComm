@@ -27,6 +27,7 @@ namespace HealthCommBackend.Services
                     .ThenInclude(u => u.PatientProfile  )
                 .Include(p => p.Prescriber)
                     .ThenInclude(u => u.PractitionerProfile)
+                .Include(p => p.RefillRequests)
                 .FirstOrDefaultAsync(p => p.Id == prescriptionId);
         }
 
@@ -37,6 +38,7 @@ namespace HealthCommBackend.Services
                     .ThenInclude(u => u.PatientProfile)
                 .Include(p => p.Prescriber)
                     .ThenInclude(u => u.PractitionerProfile)
+                .Include(p => p.RefillRequests)
                 .Where(p => p.Patient.Id == patientId)
                 .ToListAsync();
         }
@@ -48,6 +50,7 @@ namespace HealthCommBackend.Services
                     .ThenInclude(u => u.PatientProfile)
                 .Include(p => p.Prescriber)
                     .ThenInclude(u => u.PractitionerProfile)
+                .Include(p => p.RefillRequests)
                 .Where(p => p.Prescriber.Id == prescriberId)
                 .ToListAsync();
         }
@@ -58,6 +61,7 @@ namespace HealthCommBackend.Services
             return await _context.Prescriptions
                 .Include(p => p.Patient)
                 .Include(p => p.Prescriber)
+                .Include(p => p.RefillRequests)
                 .Where(p => p.Patient.NormalizedEmail == normalized)
                 .OrderByDescending(p => p.DatePrescribed)
                 .ToListAsync();
@@ -119,7 +123,19 @@ namespace HealthCommBackend.Services
             return existing;
         }
 
-        public static PrescriptionDTO ToDto(Prescription p) => new()
+        public static PrescriptionDTO ToDto(Prescription p)
+        {
+            var latestRefill = p.RefillRequests
+                .OrderByDescending(r => r.RequestedAt)
+                .FirstOrDefault();
+
+            var dto = BuildDto(p);
+            dto.RefillStatus = latestRefill?.Status;
+            dto.RefillEstimatedReadyDate = latestRefill?.EstimatedReadyDate;
+            return dto;
+        }
+
+        private static PrescriptionDTO BuildDto(Prescription p) => new()
         {
             Id = p.Id,
             PatientId = p.Patient?.Id ?? string.Empty,

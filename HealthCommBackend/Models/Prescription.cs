@@ -33,5 +33,7 @@
         public int RefillsRemaining { get; set; } = 0;
 
         public DateTime? LastSyncedAt { get; set; } = null!;
+
+        public List<RefillRequest> RefillRequests { get; set; } = new();
     }
 }

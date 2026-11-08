@@ -23,6 +23,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 
 builder.Services.AddScoped<PatientAppointmentService>();
 builder.Services.AddScoped<PrescriptionService>();
+builder.Services.AddScoped<RefillRequestService>();
 
 var app = builder.Build();
 

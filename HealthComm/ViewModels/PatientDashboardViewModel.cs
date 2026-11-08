@@ -33,8 +33,55 @@ namespace HealthComm.ViewModels
             }
         }
 
+        private string currentEmail = string.Empty;
+
+        public ICommand RequestRefillCommand => new Command<PrescriptionDTO>(
+            async p => await RequestRefillAsync(p));
+
+        private async Task RequestRefillAsync(PrescriptionDTO prescription)
+        {
+            if (prescription == null)
+            {
+                return;
+            }
+
+            try
+            {
+                using var client = new HttpClient();
+                var request = new CreateRefillRequest
+                {
+                    PrescriptionId = prescription.Id,
+                    PatientId = prescription.PatientId
+                };
+
+                var response = await client.PostAsJsonAsync($"{ApiBaseUrl}/refillrequests", request);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    await Shell.Current.DisplayAlert(
+                        "Refill Requested",
+                        $"Your refill request for {prescription.MedicationName} was sent for review.",
+                        "OK");
+                    await LoadPrescriptionsAsync(currentEmail);
+                }
+                else
+                {
+                    var message = await response.Content.ReadAsStringAsync();
+                    await Shell.Current.DisplayAlert("Refill Not Requested", message, "OK");
+                }
+            }
+            catch (Exception)
+            {
+                await Shell.Current.DisplayAlert(
+                    "Refill Not Requested",
+                    "Unable to reach the server. Please try again.",
+                    "OK");
+            }
+        }
+
         public async Task LoadPrescriptionsAsync(string email)
         {
+            currentEmail = email;
             Prescriptions.Clear();
 
             if (string.IsNullOrWhiteSpace(email))

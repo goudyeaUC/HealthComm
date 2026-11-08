@@ -16,6 +16,7 @@ namespace HealthCommBackend.Data
         public DbSet<PatientProfile> Patients { get; set; }
         public DbSet<Prescription> Prescriptions { get; set; }
         public DbSet<PatientAppointment> PatientAppointment { get; set; }
+        public DbSet<RefillRequest> RefillRequests { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
