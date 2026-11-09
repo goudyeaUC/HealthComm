@@ -17,7 +17,7 @@ namespace HealthCommBackend.Data
         public DbSet<Prescription> Prescriptions { get; set; }
         public DbSet<PatientAppointment> PatientAppointment { get; set; }
 
-        public DbSet<MedicationRecord> MedicationRecord { get; set; }
+        public DbSet<MedicationCondition> MedicationRecord { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -56,8 +56,8 @@ namespace HealthCommBackend.Data
             modelBuilder.Entity<PractitionerProfile>()
                 .HasIndex(p => p.UserId)
                 .IsUnique();
-            modelBuilder.Entity<MedicationRecord>()
-            .HasKey(m => m.MedicationId);
+            modelBuilder.Entity<MedicationCondition>()
+            .HasKey(m => m.ConditionId);
             modelBuilder.Entity<ApplicationUser>().HasData(
                 new ApplicationUser
                 {
@@ -187,34 +187,42 @@ namespace HealthCommBackend.Data
             }
             );
 
-            modelBuilder.Entity<MedicationRecord>().HasData(
+            modelBuilder.Entity<MedicationCondition>().HasData(
             new
             {
-                MedicationId = 1,
+                ConditionId = 1,
                 PatientId = 1,
-                MedicationName = "Amoxicillin",
-                Dosage = "500 mg",
-                Instructions = "Take one capsule three times daily",
-                Refills = 2,
-                ExpirationDate = (DateTime?)new DateTime(2027, 5, 15),
-                StartDate = (DateTime?)new DateTime(2026, 11, 1),
-                EndDate = (DateTime?)new DateTime(2026, 11, 10),
-                PrescribedBy = "Dr. Smith",
-                CreatedDate = new DateTime(2026, 11, 1)
+                ConditionName = "Asthma",
+                Category = "Disease",
+                ClinicalStatus = "active",
+                VerificationStatus = "confirmed",
+                Severity = "Moderate",
+                BodySite = "Respiratory system",
+                OnsetDate = (DateTime?)new DateTime(2018, 4, 1),
+                ResolvedDate = (DateTime?)null,
+                RecordedDate = new DateTime(2026, 11, 1),
+                Notes = "Patient has a history of asthma. Uses an inhaler as needed.",
+                FHIRConditionId = "condition-1",
+                FHIRCode = "195967001",
+                FHIRCodeSystem = "http://snomed.info/sct"
             },
             new
             {
-                MedicationId = 2,
+                ConditionId = 2,
                 PatientId = 1,
-                MedicationName = "Ibuprofen",
-                Dosage = "200 mg",
-                Instructions = "Take one tablet every 6 hours as needed",
-                Refills = 1,
-                ExpirationDate = (DateTime?)new DateTime(2027, 8, 20),
-                StartDate = (DateTime?)new DateTime(2026, 11, 1),
-                EndDate = (DateTime?)null,
-                PrescribedBy = "Dr. Smith",
-                CreatedDate = new DateTime(2026, 11, 1)
+                ConditionName = "Peanut Allergy",
+                Category = "Allergy",
+                ClinicalStatus = "active",
+                VerificationStatus = "confirmed",
+                Severity = "Severe",
+                BodySite = "Immune system",
+                OnsetDate = (DateTime?)new DateTime(2015, 6, 15),
+                ResolvedDate = (DateTime?)null,
+                RecordedDate = new DateTime(2026, 11, 1),
+                Notes = "Patient has a confirmed peanut allergy.",
+                FHIRConditionId = "condition-2",
+                FHIRCode = "91935009",
+                FHIRCodeSystem = "http://snomed.info/sct"
             }
             );
         }

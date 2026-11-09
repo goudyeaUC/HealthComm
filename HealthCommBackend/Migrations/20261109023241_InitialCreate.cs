@@ -58,22 +58,26 @@ namespace HealthCommBackend.Migrations
                 name: "MedicationRecord",
                 columns: table => new
                 {
-                    MedicationId = table.Column<int>(type: "INTEGER", nullable: false)
+                    ConditionId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     PatientId = table.Column<int>(type: "INTEGER", nullable: false),
-                    MedicationName = table.Column<string>(type: "TEXT", nullable: false),
-                    Dosage = table.Column<string>(type: "TEXT", nullable: false),
-                    Instructions = table.Column<string>(type: "TEXT", nullable: false),
-                    Refills = table.Column<int>(type: "INTEGER", nullable: false),
-                    ExpirationDate = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    StartDate = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    EndDate = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    PrescribedBy = table.Column<string>(type: "TEXT", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    ConditionName = table.Column<string>(type: "TEXT", nullable: false),
+                    Category = table.Column<string>(type: "TEXT", nullable: false),
+                    ClinicalStatus = table.Column<string>(type: "TEXT", nullable: false),
+                    VerificationStatus = table.Column<string>(type: "TEXT", nullable: false),
+                    Severity = table.Column<string>(type: "TEXT", nullable: true),
+                    BodySite = table.Column<string>(type: "TEXT", nullable: true),
+                    OnsetDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    ResolvedDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    RecordedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Notes = table.Column<string>(type: "TEXT", nullable: true),
+                    FHIRConditionId = table.Column<string>(type: "TEXT", nullable: true),
+                    FHIRCode = table.Column<string>(type: "TEXT", nullable: true),
+                    FHIRCodeSystem = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MedicationRecord", x => x.MedicationId);
+                    table.PrimaryKey("PK_MedicationRecord", x => x.ConditionId);
                 });
 
             migrationBuilder.CreateTable(
@@ -300,11 +304,11 @@ namespace HealthCommBackend.Migrations
 
             migrationBuilder.InsertData(
                 table: "MedicationRecord",
-                columns: new[] { "MedicationId", "CreatedDate", "Dosage", "EndDate", "ExpirationDate", "Instructions", "MedicationName", "PatientId", "PrescribedBy", "Refills", "StartDate" },
+                columns: new[] { "ConditionId", "BodySite", "Category", "ClinicalStatus", "ConditionName", "FHIRCode", "FHIRCodeSystem", "FHIRConditionId", "Notes", "OnsetDate", "PatientId", "RecordedDate", "ResolvedDate", "Severity", "VerificationStatus" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2026, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "500 mg", new DateTime(2026, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2027, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "Take one capsule three times daily", "Amoxicillin", 1, "Dr. Smith", 2, new DateTime(2026, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, new DateTime(2026, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "200 mg", null, new DateTime(2027, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "Take one tablet every 6 hours as needed", "Ibuprofen", 1, "Dr. Smith", 1, new DateTime(2026, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 1, "Respiratory system", "Disease", "active", "Asthma", "195967001", "http://snomed.info/sct", "condition-1", "Patient has a history of asthma. Uses an inhaler as needed.", new DateTime(2018, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, new DateTime(2026, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Moderate", "confirmed" },
+                    { 2, "Immune system", "Allergy", "active", "Peanut Allergy", "91935009", "http://snomed.info/sct", "condition-2", "Patient has a confirmed peanut allergy.", new DateTime(2015, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, new DateTime(2026, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Severe", "confirmed" }
                 });
 
             migrationBuilder.InsertData(

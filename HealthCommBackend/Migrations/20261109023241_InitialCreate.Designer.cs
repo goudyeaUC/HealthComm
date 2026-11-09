@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthCommBackend.Migrations
 {
     [DbContext(typeof(BackendDBContext))]
-    [Migration("20261108162601_InitialCreate")]
+    [Migration("20261109023241_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -162,77 +162,96 @@ namespace HealthCommBackend.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HealthCommBackend.Models.MedicationRecord", b =>
+            modelBuilder.Entity("HealthCommBackend.Models.MedicationCondition", b =>
                 {
-                    b.Property<int>("MedicationId")
+                    b.Property<int>("ConditionId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<string>("BodySite")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Dosage")
+                    b.Property<string>("Category")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("EndDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("ExpirationDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Instructions")
+                    b.Property<string>("ClinicalStatus")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("MedicationName")
+                    b.Property<string>("ConditionName")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FHIRCode")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FHIRCodeSystem")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FHIRConditionId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("OnsetDate")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("PatientId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("PrescribedBy")
+                    b.Property<DateTime>("RecordedDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("ResolvedDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Severity")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("VerificationStatus")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Refills")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime?>("StartDate")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("MedicationId");
+                    b.HasKey("ConditionId");
 
                     b.ToTable("MedicationRecord");
 
                     b.HasData(
                         new
                         {
-                            MedicationId = 1,
-                            CreatedDate = new DateTime(2026, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dosage = "500 mg",
-                            EndDate = new DateTime(2026, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ExpirationDate = new DateTime(2027, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Instructions = "Take one capsule three times daily",
-                            MedicationName = "Amoxicillin",
+                            ConditionId = 1,
+                            BodySite = "Respiratory system",
+                            Category = "Disease",
+                            ClinicalStatus = "active",
+                            ConditionName = "Asthma",
+                            FHIRCode = "195967001",
+                            FHIRCodeSystem = "http://snomed.info/sct",
+                            FHIRConditionId = "condition-1",
+                            Notes = "Patient has a history of asthma. Uses an inhaler as needed.",
+                            OnsetDate = new DateTime(2018, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PatientId = 1,
-                            PrescribedBy = "Dr. Smith",
-                            Refills = 2,
-                            StartDate = new DateTime(2026, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            RecordedDate = new DateTime(2026, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Severity = "Moderate",
+                            VerificationStatus = "confirmed"
                         },
                         new
                         {
-                            MedicationId = 2,
-                            CreatedDate = new DateTime(2026, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Dosage = "200 mg",
-                            ExpirationDate = new DateTime(2027, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Instructions = "Take one tablet every 6 hours as needed",
-                            MedicationName = "Ibuprofen",
+                            ConditionId = 2,
+                            BodySite = "Immune system",
+                            Category = "Allergy",
+                            ClinicalStatus = "active",
+                            ConditionName = "Peanut Allergy",
+                            FHIRCode = "91935009",
+                            FHIRCodeSystem = "http://snomed.info/sct",
+                            FHIRConditionId = "condition-2",
+                            Notes = "Patient has a confirmed peanut allergy.",
+                            OnsetDate = new DateTime(2015, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PatientId = 1,
-                            PrescribedBy = "Dr. Smith",
-                            Refills = 1,
-                            StartDate = new DateTime(2026, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            RecordedDate = new DateTime(2026, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Severity = "Severe",
+                            VerificationStatus = "confirmed"
                         });
                 });
 

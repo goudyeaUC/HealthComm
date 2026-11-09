@@ -5,19 +5,19 @@ namespace HealthCommBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MedicationRecordsController : ControllerBase
+    public class MedicalConditionController : ControllerBase
     {
 
-        private readonly MedicationRecordService _service;
+        private readonly MedicationConditionService _service;
 
 
-        public MedicationRecordsController(
-            MedicationRecordService service)
+        public MedicalConditionController(
+            MedicationConditionService service)
         {
             _service = service;
         }
 
-        // GET: api/MedicationRecords
+        // GET: api/MedicalConditionRecords
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {

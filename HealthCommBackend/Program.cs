@@ -22,7 +22,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddSignInManager();
 
 builder.Services.AddScoped<PatientAppointmentService>();
-builder.Services.AddScoped<MedicationRecordService>();
+builder.Services.AddScoped<MedicationConditionService>();
 
 var app = builder.Build();
 

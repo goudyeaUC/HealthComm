@@ -89,6 +89,7 @@ VerticalOptions="Start">
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
                 <Button
@@ -114,6 +115,14 @@ VerticalOptions="Start">
             CornerRadius="10"
             HorizontalOptions="Fill"
             Clicked="PractitionerPatientAssignmentUIButton_Clicked" />
+
+                <Button
+            Grid.Column="3"
+            Text="Medical Condition Records UI"
+            HeightRequest="55"
+            CornerRadius="10"
+            HorizontalOptions="Fill"
+            Clicked="MedicalConditionButton_Clicked" />
 
             </Grid>
 
