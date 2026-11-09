@@ -40,4 +40,10 @@ public partial class HealthCommHomePage : ContentPage
     {
         await Shell.Current.GoToAsync(nameof(PractitionerPatientAssignmentPage));
     }
+
+    private async void MedicalConditionButton_Clicked(
+       object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(MedicalConditionPage));
+    }
 }

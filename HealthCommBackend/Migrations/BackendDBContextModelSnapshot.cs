@@ -159,6 +159,99 @@ namespace HealthCommBackend.Migrations
                         });
                 });
 
+            modelBuilder.Entity("HealthCommBackend.Models.MedicationCondition", b =>
+                {
+                    b.Property<int>("ConditionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("BodySite")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ClinicalStatus")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ConditionName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FHIRCode")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FHIRCodeSystem")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FHIRConditionId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("OnsetDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("RecordedDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("ResolvedDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Severity")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("VerificationStatus")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ConditionId");
+
+                    b.ToTable("MedicationRecord");
+
+                    b.HasData(
+                        new
+                        {
+                            ConditionId = 1,
+                            BodySite = "Respiratory system",
+                            Category = "Disease",
+                            ClinicalStatus = "active",
+                            ConditionName = "Asthma",
+                            FHIRCode = "195967001",
+                            FHIRCodeSystem = "http://snomed.info/sct",
+                            FHIRConditionId = "condition-1",
+                            Notes = "Patient has a history of asthma. Uses an inhaler as needed.",
+                            OnsetDate = new DateTime(2018, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PatientId = 1,
+                            RecordedDate = new DateTime(2026, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Severity = "Moderate",
+                            VerificationStatus = "confirmed"
+                        },
+                        new
+                        {
+                            ConditionId = 2,
+                            BodySite = "Immune system",
+                            Category = "Allergy",
+                            ClinicalStatus = "active",
+                            ConditionName = "Peanut Allergy",
+                            FHIRCode = "91935009",
+                            FHIRCodeSystem = "http://snomed.info/sct",
+                            FHIRConditionId = "condition-2",
+                            Notes = "Patient has a confirmed peanut allergy.",
+                            OnsetDate = new DateTime(2015, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PatientId = 1,
+                            RecordedDate = new DateTime(2026, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Severity = "Severe",
+                            VerificationStatus = "confirmed"
+                        });
+                });
+
             modelBuilder.Entity("HealthCommBackend.Models.PatientAppointment", b =>
                 {
                     b.Property<int>("Id")

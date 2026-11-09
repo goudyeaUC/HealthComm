@@ -55,6 +55,32 @@ namespace HealthCommBackend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "MedicationRecord",
+                columns: table => new
+                {
+                    ConditionId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    PatientId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ConditionName = table.Column<string>(type: "TEXT", nullable: false),
+                    Category = table.Column<string>(type: "TEXT", nullable: false),
+                    ClinicalStatus = table.Column<string>(type: "TEXT", nullable: false),
+                    VerificationStatus = table.Column<string>(type: "TEXT", nullable: false),
+                    Severity = table.Column<string>(type: "TEXT", nullable: true),
+                    BodySite = table.Column<string>(type: "TEXT", nullable: true),
+                    OnsetDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    ResolvedDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    RecordedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Notes = table.Column<string>(type: "TEXT", nullable: true),
+                    FHIRConditionId = table.Column<string>(type: "TEXT", nullable: true),
+                    FHIRCode = table.Column<string>(type: "TEXT", nullable: true),
+                    FHIRCodeSystem = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MedicationRecord", x => x.ConditionId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PatientAppointment",
                 columns: table => new
                 {
@@ -277,6 +303,15 @@ namespace HealthCommBackend.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "MedicationRecord",
+                columns: new[] { "ConditionId", "BodySite", "Category", "ClinicalStatus", "ConditionName", "FHIRCode", "FHIRCodeSystem", "FHIRConditionId", "Notes", "OnsetDate", "PatientId", "RecordedDate", "ResolvedDate", "Severity", "VerificationStatus" },
+                values: new object[,]
+                {
+                    { 1, "Respiratory system", "Disease", "active", "Asthma", "195967001", "http://snomed.info/sct", "condition-1", "Patient has a history of asthma. Uses an inhaler as needed.", new DateTime(2018, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, new DateTime(2026, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Moderate", "confirmed" },
+                    { 2, "Immune system", "Allergy", "active", "Peanut Allergy", "91935009", "http://snomed.info/sct", "condition-2", "Patient has a confirmed peanut allergy.", new DateTime(2015, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, new DateTime(2026, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Severe", "confirmed" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "PatientAppointment",
                 columns: new[] { "Id", "PatientProfileId", "PractitionerProfileId", "StartDateTime", "VisitType" },
                 values: new object[] { 1, 1, 1, new DateTime(2026, 11, 2, 10, 0, 0, 0, DateTimeKind.Utc), "Cardiology Consultation" });
@@ -376,6 +411,9 @@ namespace HealthCommBackend.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "MedicationRecord");
 
             migrationBuilder.DropTable(
                 name: "PatientAppointment");
