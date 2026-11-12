@@ -68,6 +68,7 @@
 	<ItemGroup>
 		<PackageReference Include="Hl7.Fhir.R4" Version="6.8.0" />
 		<PackageReference Include="MailKit" Version="5.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.15" />
 		<PackageReference Include="Microsoft.Extensions.Http" Version="11.0.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="11.0.10" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="11.0.0" />
