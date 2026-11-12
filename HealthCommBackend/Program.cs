@@ -23,6 +23,8 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 
 builder.Services.AddScoped<PatientAppointmentService>();
 
+builder.Services.AddScoped<WaitTimeService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
