@@ -22,5 +22,12 @@ namespace HealthCommShared.Services
             response.EnsureSuccessStatusCode();
             return response.IsSuccessStatusCode;
         }
+
+        public async Task<bool> RegisterPatientAsync(PatientRegistrationDTO patientRegistrationRequest)
+        {
+            var response = await _httpClient.PostAsJsonAsync("api/register/patient", patientRegistrationRequest);
+            response.EnsureSuccessStatusCode();
+            return response.IsSuccessStatusCode;
+        }
     }
 }

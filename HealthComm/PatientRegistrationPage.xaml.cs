@@ -1,21 +1,24 @@
 using HealthCommShared.DTOs;
-
+using HealthCommShared.Services;
 namespace HealthComm;
 
 public partial class PatientRegistrationPage : ContentPage
 {
-	public PatientRegistrationPage()
+    private readonly LoginAPIService _loginAPIService;
+    public PatientRegistrationPage()
 	{
 		InitializeComponent();
 	}
 
     private async void RegisterPatientButton_Clicked(object sender, EventArgs e)
     {
-        string patientName = PatientNameEntry.Text;
+        string patientFirstName = PatientFirstNameEntry.Text;
+        string patientLastName = PatientLastNameEntry.Text;
         string patientEmail = PatientEmailEntry.Text;
         string patientPhone = PatientPhoneEntry.Text;
         string patientPassword = PatientPasswordEntry.Text;
-        if (string.IsNullOrWhiteSpace(patientName) ||
+        if (string.IsNullOrWhiteSpace(patientFirstName) ||
+            string.IsNullOrWhiteSpace(patientLastName) ||
             string.IsNullOrWhiteSpace(patientEmail) ||
             string.IsNullOrWhiteSpace(patientPhone) ||
             string.IsNullOrWhiteSpace(patientPassword))
@@ -26,13 +29,17 @@ public partial class PatientRegistrationPage : ContentPage
         // Create a new PatientRegistrationDTO object for the patient
         PatientRegistrationDTO newPatientDTO = new PatientRegistrationDTO
         {
-            Username = patientName,
+            FirstName = patientFirstName,
+            LastName = patientLastName,
             Email = patientEmail,
             PhoneNumber = patientPhone,
-            Password = patientPassword
+            Password = patientPassword,
+            GenderSelection = PatientGenderPicker.SelectedItem?.ToString() ?? "unknown",
+            DateOfBirth = (DateTime)PatientDOBPicker.Date,
         };
-        // Save the new patient session to the database
-        await _dbService.AddSession(newPatientDTO);
+        // Send the new patient DTO to the backend
+        await _loginAPIService.RegisterPatientAsync(newPatientDTO);
+
         await DisplayAlert("Success", "Patient registered successfully.", "OK");
         // Navigate back to the login page or main page after registration
         await Shell.Current.GoToAsync(nameof(LoginPage));
