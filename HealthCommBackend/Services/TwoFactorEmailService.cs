@@ -4,22 +4,29 @@ using MailKit.Net.Smtp;
 using MimeKit;
 using MailKit.Security;
 using HealthCommBackend.Models;
+using MailKit;
 
 namespace HealthCommBackend.Services
 {
     public class TwoFactorEmailService : IEmailSender<ApplicationUser>
     {
-    public Task SendConfirmationLinkAsync(
-        ApplicationUser user, string email, string confirmationLink)
-    {
+        public async Task SendConfirmationLinkAsync(
+            ApplicationUser user, string email, string confirmationLink)
+        {
 
-       var message = new MimeMessage();
+            var message = new MimeMessage();
             message.From.Add(new MailboxAddress("HealthComm", "noreply@HealthComm.com"));
             message.To.Add(new MailboxAddress(user.UserName, email));
             message.Subject = "Confirm your email";
             message.Body = new TextPart("html") { Text = $"Please confirm your email by clicking this link: <a href='{confirmationLink}'>Confirm Email</a>" };
 
-        }
+            using (var client = new SmtpClient())
+            {
+                await client.ConnectAsync("localhost", 1025, SecureSocketOptions.None);
+                await client.SendAsync(message);
+
+            }
+        }        
 
     public Task SendPasswordResetLinkAsync(
         ApplicationUser user, string email, string resetLink)
@@ -36,4 +43,4 @@ namespace HealthCommBackend.Services
     }
 }
     }
-}
+
