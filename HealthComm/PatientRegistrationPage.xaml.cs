@@ -1,13 +1,14 @@
 using HealthCommShared.DTOs;
-using HealthCommShared.Services;
+using HealthCommFrontend.Services;
 namespace HealthComm;
 
 public partial class PatientRegistrationPage : ContentPage
 {
     private readonly LoginAPIService _loginAPIService;
-    public PatientRegistrationPage()
+    public PatientRegistrationPage(LoginAPIService loginAPIService)
 	{
 		InitializeComponent();
+        		_loginAPIService = loginAPIService;
 	}
 
     private async void RegisterPatientButton_Clicked(object sender, EventArgs e)

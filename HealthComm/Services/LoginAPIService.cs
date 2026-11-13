@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Net.Http.Json;
 using System.Text;
 
-namespace HealthCommShared.Services
+namespace HealthCommFrontend.Services
 {
     public class LoginAPIService
     {
@@ -26,6 +26,13 @@ namespace HealthCommShared.Services
         public async Task<bool> RegisterPatientAsync(PatientRegistrationDTO patientRegistrationRequest)
         {
             var response = await _httpClient.PostAsJsonAsync("api/register/patient", patientRegistrationRequest);
+            response.EnsureSuccessStatusCode();
+            return response.IsSuccessStatusCode;
+        }
+
+        public async Task<bool> RegisterPractitionerAsync(PractitionerRegistrationDTO practitionerRegistrationRequest)
+        {
+            var response = await _httpClient.PostAsJsonAsync("api/register/practitioner", practitionerRegistrationRequest);
             response.EnsureSuccessStatusCode();
             return response.IsSuccessStatusCode;
         }
