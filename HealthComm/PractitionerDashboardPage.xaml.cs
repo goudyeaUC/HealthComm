@@ -25,10 +25,8 @@ public partial class PractitionerDashboardPage : ContentPage
         {
             using var client = new HttpClient();
 
-            // developer needs to check port for the backend API and update the URL accordingly
-
             string url =
-                "http://localhost:5167/api/practitioners";
+                "http://localhost:8080/api/practitioners";
           
 
             try

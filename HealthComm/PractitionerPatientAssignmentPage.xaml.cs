@@ -36,12 +36,12 @@ public partial class PractitionerPatientAssignmentPage : ContentPage
             //TODO Note: If you're running the MAUI app on an Android emulator, replace localhost with 10.0.2.2
             _patients =
                 await _httpClient.GetFromJsonAsync<List<PatientAppointmentDTO>>(
-                    "http://localhost:5167/api/PatientAppointments/patients")
+                    "http://localhost:8080/api/PatientAppointments/patients")
                 ?? new List<PatientAppointmentDTO>();
 
             _practitioners =
                 await _httpClient.GetFromJsonAsync<List<PractitionerAppointmentDTO>>(
-                    "http://localhost:5167/api/PatientAppointments/practitioners")
+                    "http://localhost:8080/api/PatientAppointments/practitioners")
                 ?? new List<PractitionerAppointmentDTO>();
 
             PatientPicker.ItemsSource = _patients;
@@ -87,7 +87,7 @@ public partial class PractitionerPatientAssignmentPage : ContentPage
             using var httpClient = new HttpClient();
 
             var url =
-                $"http://localhost:5167/api/PatientAppointments/" +
+                $"http://localhost:8080/api/PatientAppointments/" +
                 $"patient/{patientSelected.Id}/practitioner/{practitionerSelected.Id}";
 
             var appointments =
@@ -182,7 +182,7 @@ public partial class PractitionerPatientAssignmentPage : ContentPage
             using var httpClient = new HttpClient();
 
             var response = await httpClient.PostAsJsonAsync(
-                "http://localhost:5167/api/PatientAppointments",
+                "http://localhost:8080/api/PatientAppointments",
                 request);
 
             if (response.IsSuccessStatusCode)

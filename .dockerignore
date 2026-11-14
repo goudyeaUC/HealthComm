@@ -39,6 +39,8 @@ coverage
 .env
 .env.local
 .env.*.local
+Certificates/
+*.pfx
 
 # Docker artifacts
 Dockerfile
