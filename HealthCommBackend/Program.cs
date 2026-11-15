@@ -1,6 +1,7 @@
 using HealthCommBackend.Data;
 using HealthCommBackend.Models;
 using HealthCommBackend.Services;
+using HealthCommBackend.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,8 @@ builder.Services
     .AddSignInManager();
 
 builder.Services.AddScoped<PatientAppointmentService>();
+
+builder.Services.AddScoped<IUserRegistrationService, LoginService>();
 
 builder.Services.AddTransient<IEmailSender<ApplicationUser>, TwoFactorEmailService>();
 

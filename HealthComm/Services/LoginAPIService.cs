@@ -23,8 +23,8 @@ namespace HealthCommFrontend.Services
 
             var result = await response.Content.ReadFromJsonAsync<LoginResultDTO>()
                 ?? throw new InvalidOperationException("Failed to deserialize login result.");
-            await SecureStorage.SetAsync("access_token", result.AccessToken);
-            await SecureStorage.SetAsync("refresh_token", result.RefreshToken);
+            await SecureStorage.Default.SetAsync("access_token", result.AccessToken);
+            await SecureStorage.Default.SetAsync("refresh_token", result.RefreshToken);
             return result;
         }
 

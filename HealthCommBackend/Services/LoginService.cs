@@ -39,7 +39,7 @@ namespace HealthCommBackend.Services
             {
                 var patientProfile = new PatientProfile
                 {
-                    UserId = patientRegistrationRequest.Email,
+                    UserId = user.Id,
                     FirstName = patientRegistrationRequest.FirstName,
                     LastName = patientRegistrationRequest.LastName,
                     DateOfBirth = patientRegistrationRequest.DateOfBirth,
@@ -66,7 +66,7 @@ namespace HealthCommBackend.Services
             {
                 var practitionerProfile = new PractitionerProfile
                 {
-                    UserId = practitionerRegistrationRequest.Email,
+                    UserId = user.Id,
                     FirstName = practitionerRegistrationRequest.FirstName,
                     LastName = practitionerRegistrationRequest.LastName,
                     DateOfBirth = practitionerRegistrationRequest.DateOfBirth,
