@@ -1,6 +1,7 @@
 using HealthCommBackend.Data;
 using HealthCommBackend.Models;
 using HealthCommBackend.Services;
+using HealthCommBackend.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -16,12 +17,17 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<BackendDBContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+builder.Services
+    .AddIdentityApiEndpoints<ApplicationUser>()
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<BackendDBContext>()
     .AddSignInManager();
 
 builder.Services.AddScoped<PatientAppointmentService>();
+
+builder.Services.AddScoped<IUserRegistrationService, LoginService>();
+
+builder.Services.AddTransient<IEmailSender<ApplicationUser>, TwoFactorEmailService>();
 
 var app = builder.Build();
 

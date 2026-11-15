@@ -21,5 +21,6 @@
         <Entry x:Name="PatientEmailEntry" Placeholder="Enter patient email" />
         <Entry x:Name="PatientPhoneEntry" Placeholder="Enter patient phone number" />
         <Entry x:Name="PatientPasswordEntry" Placeholder="Enter patient password" />
+        <Button x:Name="RegisterPatientButton" Text="Register Patient" Clicked="RegisterPatientButton_Clicked" />
     </VerticalStackLayout>
 </ContentPage>

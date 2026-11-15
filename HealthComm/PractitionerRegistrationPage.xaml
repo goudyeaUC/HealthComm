@@ -16,8 +16,8 @@
         <Entry x:Name="PractitionerSpecialty" Placeholder="Enter specialty" />
         <Label Text="Email" />
         <Entry x:Name="PractitionerEmailEntry" Placeholder="Enter email address" />
-        <Label Text="Phone Number" />
-        <Entry x:Name="PractitionerPhoneEntry" Placeholder="Enter phone number" />
-
+        <Label Text="Password" />
+        <Entry x:Name="PractitionerPasswordEntry" Placeholder="Enter password" IsPassword="True" />
+        <Button x:Name="PractitionerRegisterButton" Text="Register Practitioner" Clicked="RegisterPractitionerButton_Clicked" />
     </VerticalStackLayout>
 </ContentPage>

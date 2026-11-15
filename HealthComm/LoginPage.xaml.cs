@@ -48,6 +48,16 @@ public partial class LoginPage : ContentPage
         ErrorLabel.IsVisible = true;
     }
 
+    private void RegisterPatientButton_Clicked(object sender, EventArgs e)
+    {
+        Shell.Current.GoToAsync(nameof(PatientRegistrationPage));
+    }
+
+    private void RegisterPractitionerButton_Clicked(object sender, EventArgs e)
+    {
+        Shell.Current.GoToAsync(nameof(PractitionerRegistrationPage));
+    }
+
     private void guestbutton_Clicked(object sender, EventArgs e)
     {
         Shell.Current.GoToAsync(nameof(MainPage));

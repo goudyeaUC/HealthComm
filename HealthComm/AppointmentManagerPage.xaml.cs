@@ -19,7 +19,7 @@ public partial class AppointmentManagerPage : ContentPage
         try
         {
             using var client = new HttpClient();
-            string url = "http://localhost:5167/api/Appointment/sample";
+            string url = "http://localhost:8080/api/Appointment/sample";
             var response = await client.GetAsync(url);
 
             string str2 = await response.Content.ReadAsStringAsync();
