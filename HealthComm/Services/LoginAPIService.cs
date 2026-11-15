@@ -14,27 +14,50 @@ namespace HealthCommFrontend.Services
             _httpClient = httpClient;
         }
 
-        //CHANGE THIS TO USE OUR ACTUAL DTOs
-        public async Task<bool> LoginAsync(LoginRequestDTO loginRequest)
+        
+        public async Task<LoginResultDTO> LoginAsync(LoginRequestDTO loginRequest)
         {
-            var response = await _httpClient.PostAsJsonAsync("api/login", loginRequest);
+            var response = await _httpClient.PostAsJsonAsync("identity/login?useCookies=false", loginRequest);
 
             response.EnsureSuccessStatusCode();
-            return response.IsSuccessStatusCode;
+
+            var result = await response.Content.ReadFromJsonAsync<LoginResultDTO>()
+                ?? throw new InvalidOperationException("Failed to deserialize login result.");
+            await SecureStorage.SetAsync("access_token", result.AccessToken);
+            await SecureStorage.SetAsync("refresh_token", result.RefreshToken);
+            return result;
         }
 
         public async Task<bool> RegisterPatientAsync(PatientRegistrationDTO patientRegistrationRequest)
         {
             var response = await _httpClient.PostAsJsonAsync("api/register/patient", patientRegistrationRequest);
-            response.EnsureSuccessStatusCode();
-            return response.IsSuccessStatusCode;
+            switch (response.StatusCode)
+            {
+                case System.Net.HttpStatusCode.OK:
+                    return true;
+                case System.Net.HttpStatusCode.BadRequest:
+                    // Handle bad request, possibly log the error or notify the user
+                    return false;
+                default:
+                    // Handle other status codes as needed
+                    return false;
+            }
         }
 
         public async Task<bool> RegisterPractitionerAsync(PractitionerRegistrationDTO practitionerRegistrationRequest)
         {
             var response = await _httpClient.PostAsJsonAsync("api/register/practitioner", practitionerRegistrationRequest);
-            response.EnsureSuccessStatusCode();
-            return response.IsSuccessStatusCode;
+            switch (response.StatusCode)
+            {
+                case System.Net.HttpStatusCode.OK:
+                    return true;
+                case System.Net.HttpStatusCode.BadRequest:
+                    // Handle bad request, possibly log the error or notify the user
+                    return false;
+                default:
+                    // Handle other status codes as needed
+                    return false;
+            }
         }
     }
 }

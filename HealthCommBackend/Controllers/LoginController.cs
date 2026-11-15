@@ -17,7 +17,7 @@ namespace HealthCommBackend.Controllers
             _registrationService = registrationService;
         }
 
-        [HttpPost("register/patient")]
+        [HttpPost("api/register/patient")]
         [AllowAnonymous]
         public async Task<IActionResult> RegisterPatient([FromBody] PatientRegistrationDTO patientRegistrationRequest)
         {
@@ -32,7 +32,7 @@ namespace HealthCommBackend.Controllers
             }
         }
 
-        [HttpPost("register/practitioner")]
+        [HttpPost("api/register/practitioner")]
         [AllowAnonymous]
         public async Task<IActionResult> RegisterPractitioner([FromBody] PractitionerRegistrationDTO practitionerRegistrationRequest)
         {
@@ -46,5 +46,7 @@ namespace HealthCommBackend.Controllers
                 return BadRequest(result.Errors);
             }
         }
+
+    
     }
 }

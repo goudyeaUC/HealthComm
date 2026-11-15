@@ -89,5 +89,28 @@ namespace HealthCommBackend.Services
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async System.Threading.Tasks.Task DeletePractitionerAsync(string email)
+        {
+            var practitioner = await _context.Practitioners.FirstOrDefaultAsync(p => p.Email == email);
+            if (practitioner != null)
+            {
+                await _userManager.DeleteAsync(await _userManager.FindByEmailAsync(email));
+                _context.Practitioners.Remove(practitioner);
+                await _context.SaveChangesAsync();
+            }
+        }
+        //Commented out as deprecated for now; use Core ID's login endpoint instead 
+        /* public async Task<LoginResultDTO> LoginAsync(LoginRequestDTO loginRequest)
+                {
+                    var user = await _userManager.FindByEmailAsync(loginRequest.Email);
+                    if (user != null && await _userManager.CheckPasswordAsync(user, loginRequest.Password))
+                    {
+                        // Generate a token or any other login success logic here
+                        var token = "dummy-token"; // Replace with actual token generation logic
+                        return new LoginResultDTO { Succeeded = true, Token = token };
+                    }
+                    return new LoginResultDTO { Succeeded = false };
+                }*/
     }
 }
