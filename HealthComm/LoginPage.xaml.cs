@@ -68,4 +68,14 @@ public partial class LoginPage : ContentPage
         // Shell.Current.GoToAsync("..");
         Shell.Current.GoToAsync(nameof(AdminPage));
     }
+
+    private void RegisterPatientButton_Clicked(object sender, EventArgs e)
+    {
+        Shell.Current.GoToAsync(nameof(PatientRegistrationPage));
+    }
+
+    private void RegisterPractitionerButton_Clicked(object sender, EventArgs e)
+    {
+        Shell.Current.GoToAsync(nameof(PractitionerRegistrationPage));
+    }
 }
