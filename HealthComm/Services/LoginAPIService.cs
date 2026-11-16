@@ -1,5 +1,4 @@
 ﻿using HealthCommShared.DTOs;
-using 
 using System;
 using System.Collections.Generic;
 using System.Net.Http.Json;
@@ -38,7 +37,7 @@ namespace HealthCommFrontend.Services
                     return true;
                 case System.Net.HttpStatusCode.BadRequest:
                     // Handle bad request, possibly log the error or notify the user
-                    await DisplayAlertAsync("Error", "Invalid patient registration data.", "OK");
+                 
                     return false;
                 default:
                     // Handle other status codes as needed
