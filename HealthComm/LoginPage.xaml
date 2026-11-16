@@ -28,14 +28,14 @@
                         <Label Text="Enter your information to continue to the session list."
                        TextColor="DimGray" />
 
-                        <Entry x:Name="Username"
-                       Placeholder="Username"
+                        <Entry x:Name="UserEmail"
+                       Placeholder="Enter Email"
+                       Keyboard="Email"
                        HorizontalOptions="Fill"
                        ClearButtonVisibility="WhileEditing" />
 
-                        <Entry x:Name="UserEmail"
-                       Placeholder="Email"
-                       Keyboard="Email"
+                        <Entry x:Name="UserPassword"
+                       Placeholder="Enter Password"
                        HorizontalOptions="Fill"
                        ClearButtonVisibility="WhileEditing" />
 

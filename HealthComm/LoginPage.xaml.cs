@@ -1,5 +1,7 @@
 
 using HealthComm.Models;
+using HealthCommFrontend.Services;
+using HealthCommShared.DTOs;
 using HealthCommShared.Services;
 
 
@@ -7,40 +9,31 @@ namespace HealthComm;
 
 public partial class LoginPage : ContentPage
 {
-    private readonly LocalDBService _dbService;
-    public LoginPage(LocalDBService dbService)
+    private readonly LoginAPIService _loginAPIService;
+    public LoginPage(LoginAPIService loginAPIService)
     {
         InitializeComponent();
-        _dbService = dbService;
+        _loginAPIService = loginAPIService;
     }
     private async void loginbutton_Clicked(object sender, EventArgs e)
     {
         ErrorLabel.IsVisible = false;
 
-        if (string.IsNullOrWhiteSpace(Username.Text) ||
-            string.IsNullOrWhiteSpace(UserEmail.Text))
+        if (string.IsNullOrWhiteSpace(UserEmail.Text) ||
+            string.IsNullOrWhiteSpace(UserPassword.Text))
         {
             ShowError("All fields are required.");
             return;
         }
 
-        //      var session = await _dbService.GetSessionByEmail(UserEmail.Text);
-        List<Session> sessions = await _dbService.GetSessions();
-        Session session = sessions.FirstOrDefault(s =>
-            s.Email == UserEmail.Text);
+        var result = await _loginAPIService.LoginAsync( new LoginRequestDTO{ Email = UserEmail.Text, Password = UserPassword.Text });
 
-
-        if (session == null)
+        if (result == null)
         {
-            ShowError("User not found. Please check your email.");
+            ShowError("Invalid email or password.");
             return;
         }
-        var myData = new Dictionary<string, object>
-            {
-                {"username",$"{Username.Text}" },
-                {"useremail", $"{UserEmail.Text}" }
-            };
-        Shell.Current.GoToAsync(nameof(MainPage), myData);
+        else { await Shell.Current.GoToAsync(nameof(MainPage)); }
     }
     private void ShowError(string message)
     {
