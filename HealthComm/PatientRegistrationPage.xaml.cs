@@ -50,6 +50,6 @@ public partial class PatientRegistrationPage : ContentPage
             await DisplayAlertAsync("Error", "Failed to register patient.", "OK");
         }
         // Navigate back to the login page or main page after registration
-        await Shell.Current.GoToAsync(nameof(LoginPage));
+        await Shell.Current.GoToAsync(nameof(HealthCommHomePage));
     }
 }
