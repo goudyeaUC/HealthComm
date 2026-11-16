@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Http;
 using HealthCommFrontend.Services;
+using HealthCommShared.Services;
 
 
 namespace HealthComm
@@ -25,7 +26,8 @@ namespace HealthComm
             builder.Services.AddHttpClient<LoginAPIService>(
                 client => client.BaseAddress = new Uri("http://localhost:8080/")
                 );
-
+            //WARNING: This implementation is deprecated. Remove this when the proper backend connection is ready.
+            builder.Services.AddSingleton<LocalDBService>();
             builder.Services.AddTransient<AdminPage>();
             builder.Services.AddTransient<HomePage>();
             builder.Services.AddTransient<LoginPage>();
