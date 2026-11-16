@@ -23,6 +23,9 @@ builder.Services
     .AddEntityFrameworkStores<BackendDBContext>()
     .AddSignInManager();
 
+
+builder.Services.AddScoped<IEmailSender<ApplicationUser>, IdentityEmailSender>();
+
 builder.Services.AddScoped<PatientAppointmentService>();
 
 builder.Services.AddScoped<IUserRegistrationService, LoginService>();
