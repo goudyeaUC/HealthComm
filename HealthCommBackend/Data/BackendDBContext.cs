@@ -17,11 +17,6 @@ namespace HealthCommBackend.Data
         public DbSet<Prescription> Prescriptions { get; set; }
         public DbSet<PatientAppointment> PatientAppointment { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlite($"Data Source=HealthComm.db");
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
