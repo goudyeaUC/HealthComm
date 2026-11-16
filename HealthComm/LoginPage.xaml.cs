@@ -29,12 +29,12 @@ public partial class LoginPage : ContentPage
         Session session = sessions.FirstOrDefault(s =>
             s.Email == UserEmail.Text);
 
-  
+
         if (session == null)
         {
             ShowError("User not found. Please check your email.");
             return;
-        } 
+        }
         var myData = new Dictionary<string, object>
             {
                 {"username",$"{Username.Text}" },
@@ -79,13 +79,5 @@ public partial class LoginPage : ContentPage
         Shell.Current.GoToAsync(nameof(AdminPage));
     }
 
-    private void RegisterPatientButton_Clicked(object sender, EventArgs e)
-    {
-        Shell.Current.GoToAsync(nameof(PatientRegistrationPage));
-    }
 
-    private void RegisterPractitionerButton_Clicked(object sender, EventArgs e)
-    {
-        Shell.Current.GoToAsync(nameof(PractitionerRegistrationPage));
-    }
 }
