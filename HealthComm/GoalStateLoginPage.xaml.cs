@@ -28,7 +28,7 @@ public partial class GoalStateLoginPage : ContentPage
             var request = new LoginRequestDTO
             {
                 Email = EmailEntry.Text.Trim(),
-                GivenPassword = PasswordEntry.Text
+                Password = PasswordEntry.Text
             };
 
             /*     using var _httpClient = new HttpClient();
