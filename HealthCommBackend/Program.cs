@@ -16,9 +16,8 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddDbContext<BackendDBContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-builder.Services
-    .AddIdentityApiEndpoints<ApplicationUser>()
+//WARNING: Email sending is disabled at this time for demonstration purposes. Please configure email sending for final version.
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => { options.SignIn.RequireConfirmedEmail = false; })
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<BackendDBContext>()
     .AddSignInManager();
