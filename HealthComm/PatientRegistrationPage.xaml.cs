@@ -24,7 +24,7 @@ public partial class PatientRegistrationPage : ContentPage
             string.IsNullOrWhiteSpace(patientPhone) ||
             string.IsNullOrWhiteSpace(patientPassword))
         {
-            await DisplayAlert("Error", "All fields are required.", "OK");
+            await DisplayAlertAsync("Error", "All fields are required.", "OK");
             return;
         }
         // Create a new PatientRegistrationDTO object for the patient
@@ -39,9 +39,16 @@ public partial class PatientRegistrationPage : ContentPage
             DateOfBirth = (DateTime)PatientDOBPicker.Date,
         };
         // Send the new patient DTO to the backend
-        await _loginAPIService.RegisterPatientAsync(newPatientDTO);
+        var registerSuccess = await _loginAPIService.RegisterPatientAsync(newPatientDTO);
 
-        await DisplayAlert("Success", "Patient registered successfully.", "OK");
+        if (registerSuccess)
+        {
+            await DisplayAlertAsync("Success", "Patient registered successfully.", "OK");
+        }
+        else
+        {
+            await DisplayAlertAsync("Error", "Failed to register patient.", "OK");
+        }
         // Navigate back to the login page or main page after registration
         await Shell.Current.GoToAsync(nameof(LoginPage));
     }

@@ -24,7 +24,7 @@ public partial class PractitionerRegistrationPage : ContentPage
             string.IsNullOrWhiteSpace(practitionerEmail) ||
             string.IsNullOrWhiteSpace(practitionerPassword))
         {
-            await DisplayAlert("Error", "All fields are required.", "OK");
+            await DisplayAlertAsync("Error", "All fields are required.", "OK");
             return;
         }
         // Create a new PractitionerRegistrationDTO object for the practitioner
@@ -38,8 +38,15 @@ public partial class PractitionerRegistrationPage : ContentPage
             DateOfBirth = (DateTime)PractitionerDOBPicker.Date,
         };
         // Send the new practitioner DTO to the backend
-        await _loginAPIService.RegisterPractitionerAsync(newPractitionerDTO);
-        await DisplayAlert("Success", "Practitioner registered successfully.", "OK");
+       var registerSuccess = await _loginAPIService.RegisterPractitionerAsync(newPractitionerDTO);
+        if (registerSuccess)
+        {
+            await DisplayAlertAsync("Success", "Practitioner registered successfully.", "OK");
+        }
+        else
+        {
+            await DisplayAlertAsync("Error", "Failed to register practitioner.", "OK");
+        }
         // Navigate back to the login page or main page after registration
         await Shell.Current.GoToAsync(nameof(LoginPage));
     }
