@@ -19,7 +19,7 @@ public partial class HealthCommHomePage : ContentPage
     private async void LoginButton_Clicked(
        object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(nameof(GoalStateLoginPage));
+        await Shell.Current.GoToAsync(nameof(LoginPage));
     }
 
     private async void RegisterPractitionerButton_Clicked(
