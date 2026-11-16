@@ -21,6 +21,9 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<BackendDBContext>()
     .AddSignInManager();
 
+
+builder.Services.AddScoped<IEmailSender<ApplicationUser>, IdentityEmailSender>();
+
 builder.Services.AddScoped<PatientAppointmentService>();
 
 var app = builder.Build();
