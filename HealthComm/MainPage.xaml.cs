@@ -18,6 +18,7 @@ namespace HealthComm
         protected override void OnAppearing()
         {
             base.OnAppearing();
+
             // Add blank line after the text
 
             string displayName = string.IsNullOrWhiteSpace(User_Name)
@@ -41,6 +42,11 @@ namespace HealthComm
         {
             // Shell.Current.GoToAsync("..");
             Shell.Current.GoToAsync(nameof(HomePage));
+        }
+        private async void PrescriptionsButton_Clicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync(nameof(PrescriptionsPage),
+                new Dictionary<string, object> { { "useremail", UserEmail ?? string.Empty } });
         }
         private void AdminButton_Clicked(object sender, EventArgs e)
         {

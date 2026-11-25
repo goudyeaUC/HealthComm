@@ -394,6 +394,44 @@ namespace HealthCommBackend.Migrations
                     b.ToTable("Prescriptions");
                 });
 
+            modelBuilder.Entity("HealthCommBackend.Models.RefillRequest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("EstimatedReadyDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PatientNote")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("PrescriptionId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("RequestedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ResponseNote")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("ReviewedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ReviewedById")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PrescriptionId");
+
+                    b.ToTable("RefillRequests");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -559,6 +597,17 @@ namespace HealthCommBackend.Migrations
                     b.Navigation("Prescriber");
                 });
 
+            modelBuilder.Entity("HealthCommBackend.Models.RefillRequest", b =>
+                {
+                    b.HasOne("HealthCommBackend.Models.Prescription", "Prescription")
+                        .WithMany("RefillRequests")
+                        .HasForeignKey("PrescriptionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Prescription");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -615,6 +664,11 @@ namespace HealthCommBackend.Migrations
                     b.Navigation("PatientProfile");
 
                     b.Navigation("PractitionerProfile");
+                });
+
+            modelBuilder.Entity("HealthCommBackend.Models.Prescription", b =>
+                {
+                    b.Navigation("RefillRequests");
                 });
 #pragma warning restore 612, 618
         }

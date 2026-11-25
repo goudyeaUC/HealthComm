@@ -52,15 +52,10 @@
                         <Label Text="My Prescriptions"
                    FontAttributes="Bold"/>
 
-                        <CollectionView ItemsSource="{Binding Prescriptions}">
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <Frame Margin="0,5">
-                                        <Label Text="{Binding DisplayText}"/>
-                                    </Frame>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
+                        <Label Text="View your medications and request refills on a separate page."
+                               TextColor="Gray"/>
+                        <Button Text="View Prescriptions"
+                                Clicked="PrescriptionsButton_Clicked"/>
                     </VerticalStackLayout>
                 </Frame>
 

@@ -12,8 +12,6 @@ namespace HealthComm.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ObservableCollection<Prescription> Prescriptions { get; set; }
-
         public ObservableCollection<Appointment> Appointments { get; set; }
 
         private string question;
@@ -34,20 +32,6 @@ namespace HealthComm.ViewModels
 
         public PatientDashboardViewModel()
         {
-            Prescriptions = new ObservableCollection<Prescription>
-            {
-            new Prescription
-            {
-            DrugName="Lisinopril",
-            Dosage="10mg Daily"
-            },
-            new Prescription
-            {
-            DrugName="Metformin",
-            Dosage="500mg Twice Daily"
-            }
-        };
-
             Appointments = new ObservableCollection<Appointment>
             {
                 new Appointment

@@ -24,6 +24,8 @@ builder.Services
     .AddSignInManager();
 
 builder.Services.AddScoped<PatientAppointmentService>();
+builder.Services.AddScoped<PrescriptionService>();
+builder.Services.AddScoped<RefillRequestService>();
 
 builder.Services.AddScoped<IUserRegistrationService, LoginService>();
 
