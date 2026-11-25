@@ -15,7 +15,7 @@ namespace HealthComm.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         // developer needs to check port for the backend API and update the URL accordingly
-        private const string ApiBaseUrl = "http://localhost:5167/api";
+        private const string ApiBaseUrl = "http://localhost:8080/api";
 
         public ObservableCollection<PrescriptionDTO> Prescriptions { get; } = new();
 
