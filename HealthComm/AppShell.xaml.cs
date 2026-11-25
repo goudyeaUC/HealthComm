@@ -14,6 +14,7 @@
             Routing.RegisterRoute(nameof(AdminPage), typeof(AdminPage));
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
             Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
+            Routing.RegisterRoute(nameof(PrescriptionsPage), typeof(PrescriptionsPage));
             Routing.RegisterRoute(nameof(PractitionerDashboardPage), typeof(PractitionerDashboardPage));
             Routing.RegisterRoute(nameof(PractionerAppointment), typeof(PractionerAppointment));
         }

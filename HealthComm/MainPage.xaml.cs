@@ -15,14 +15,9 @@ namespace HealthComm
             BindingContext =
             new PatientDashboardViewModel();
         }
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
-
-            if (BindingContext is PatientDashboardViewModel vm)
-            {
-                await vm.LoadPrescriptionsAsync(UserEmail);
-            }
 
             // Add blank line after the text
 
@@ -47,6 +42,11 @@ namespace HealthComm
         {
             // Shell.Current.GoToAsync("..");
             Shell.Current.GoToAsync(nameof(HomePage));
+        }
+        private async void PrescriptionsButton_Clicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync(nameof(PrescriptionsPage),
+                new Dictionary<string, object> { { "useremail", UserEmail ?? string.Empty } });
         }
         private void AdminButton_Clicked(object sender, EventArgs e)
         {
